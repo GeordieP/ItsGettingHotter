@@ -3,11 +3,16 @@ using System.Collections;
 
 public class MouseHandler : MonoBehaviour {
 
-    public GameObject theUnit;
+    //public GameObject theUnit;
+
+    public Unit[] units;
 
 	// Use this for initialization
 	void Start () {
-	
+        units = GameObject.FindObjectsOfType<Unit>();
+        foreach (Unit unit in units) {
+            unit.SetColor();
+        }
 	}
 	
 	// Update is called once per frame
@@ -18,17 +23,13 @@ public class MouseHandler : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             theray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(theray, out hitinfo)) {
-                //playerCharacterScript.AddTarget(hitinfo.transform.gameObject);
-                //theUnit.GetComponent<Unit>().SetTarget(hitinfo.point);
-                //print("the position: " + hitinfo.transform.position.ToString());
                 if (hitinfo.transform.gameObject.tag == "Node") {
-                    //theUnit.GetComponent<Unit>().SetTarget(hitinfo.transform.gameObject.transform);       // pass the node to the unit
-                    theUnit.GetComponent<Unit>().AddTarget(hitinfo.transform.gameObject.transform);
+                    foreach (Unit unit in units) {
+                        unit.AddTarget(hitinfo.transform.gameObject.transform);
+                    }
                     hitinfo.transform.GetComponent<Node>().ToggleSelected();
                 }
             }
-        } else if (Input.GetMouseButton(1)) {
-            // do it differently for nodes
         }
 	}
 }
