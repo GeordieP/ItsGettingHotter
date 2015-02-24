@@ -37,6 +37,9 @@ public class Unit : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         targetNodes = new List<Transform>();
+
+        planet = GameObject.Find("Planet");     // TODO: replace this line when the global class is implemented, as it should have a reference to the planet at all times
+
 	}
 
 	// Update is called once per frame
