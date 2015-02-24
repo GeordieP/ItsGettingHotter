@@ -4,9 +4,11 @@ using System.Collections;
 public class HomeNode : MonoBehaviour {
     public GameObject unitTemplate;
     private GameObject tempUnit;
+    private Transform unitSpawnLocation;
 
 	void Start () {
-        SpawnUnits(3);
+        unitSpawnLocation = transform.FindChild("UnitSpawnLoc");
+        SpawnUnits(10);
 	}
 
 	void Update () {
@@ -20,6 +22,13 @@ public class HomeNode : MonoBehaviour {
     }
 
     public void SpawnUnit() {
-        tempUnit = Instantiate(unitTemplate, this.transform.position, Quaternion.identity) as GameObject;
+        if (unitSpawnLocation)
+            tempUnit = Instantiate(unitTemplate, unitSpawnLocation.position + GetRandomVector(), Quaternion.identity) as GameObject;
+        else
+            tempUnit = Instantiate(unitTemplate, this.transform.position, Quaternion.identity) as GameObject;
+    }
+
+    private Vector3 GetRandomVector() {
+        return new Vector3(Random.value, Random.value, 0.0f);
     }
 }

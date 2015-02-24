@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour {
 
     // Unit
     Color idleColor = Color.white;
+    public bool selected = false;
 
     // Unit Movement
     private Vector3 moveAxis = Vector3.zero;
@@ -46,7 +47,8 @@ public class Unit : MonoBehaviour {
 	void Update () {
         switch (state) {
             case States.Idle:
-                this.renderer.material.color = idleColor;
+                //this.renderer.material.color = idleColor;
+                this.renderer.material.color = (selected) ? Color.blue : Color.white;
                 break;
             case States.Walking:
                 if (!foundTarget) {
@@ -65,8 +67,16 @@ public class Unit : MonoBehaviour {
         }
 	}
 
+    public void SetSelected(bool isSelected) {
+        selected = isSelected;
+    }
+
     public void SetColor() {
         idleColor = Color.blue;
+    }
+
+    public void UnsetColor() {
+        idleColor = Color.white;
     }
 
     IEnumerator ExecuteTask() {
