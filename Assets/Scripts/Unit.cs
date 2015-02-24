@@ -21,7 +21,6 @@ public class Unit : MonoBehaviour {
     public GameObject planet;
 
     private Transform currentTarget;
-    bool taskCompleted = false;
 
     private List<Transform> targetNodes;
     private float currentTaskTime = 0.0f;
@@ -63,18 +62,22 @@ public class Unit : MonoBehaviour {
     IEnumerator ExecuteTask() {
         this.renderer.material.color = Color.red;
         yield return new WaitForSeconds(currentTaskTime);
-        taskCompleted = true;
+        // task is completed, move on
+        currentTarget.GetComponent<Node>().TaskCompleted();
         NextTarget();
     }
 
     private void NextTarget() {
         state = States.Idle;
         targetNodes.RemoveAt(0);
+        foundTarget = false;
+
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
-            foundTarget = false;
             state = States.Walking;
         } else {
+            // no more nodes left in the list
+            state = States.Idle;
             // return to home node?
         }
     }
@@ -98,7 +101,7 @@ public class Unit : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider otherCollider) {
-        if (otherCollider.gameObject.tag == "Node") {
+        if (otherCollider.gameObject.transform == currentTarget) {
             // we've made it to the target
             foundTarget = true;
             print("we at the combination pizza hut and taco bell");

@@ -9,7 +9,15 @@ public class Node : MonoBehaviour {
 
     public void ToggleSelected() {
         selected = !selected;
+        UpdateColor();
+    }
 
+    public void TaskCompleted() {
+        selected = false;
+        UpdateColor();
+    }
+
+    private void UpdateColor() {
         this.renderer.material.color = (selected) ? Color.green : Color.white;
     }
 }
