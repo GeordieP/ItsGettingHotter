@@ -30,6 +30,7 @@ public class Unit : MonoBehaviour {
     Color idleColor = Color.white;
     public bool selected = false;
     public bool selectable = false;          // whether or not we can select this unit (used to avoid selecting units through the other side of the planet)
+    private float unitRadius = 0.0f;
 
     // Unit Movement
     private Vector3 moveAxis = Vector3.zero;
@@ -40,8 +41,12 @@ public class Unit : MonoBehaviour {
 	void Start () {
         targetNodes = new List<Transform>();
 
+        unitRadius = this.GetComponent<SphereCollider>().radius;
+        //unitRadius = this.transform.localScale.x;
+
         planet = GameObject.Find("Planet");     // TODO: replace this line when the global class is implemented, as it should have a reference to the planet at all times
 
+        SnapToPlanetSurface();
 	}
 
 	// Update is called once per frame
@@ -127,6 +132,15 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public void SnapToPlanetSurface() {
+        print("called");
+        Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
+        RaycastHit hit;
+
+        if (Physics.Raycast(theray, out hit)) {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, hit.point, hit.distance);
+        }
+    }
 
     // Called by the camera when selecting units. Prevents selecting units that shouldn't be
     public bool Select() {
