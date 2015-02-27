@@ -29,6 +29,7 @@ public class Unit : MonoBehaviour {
     // Unit
     Color idleColor = Color.white;
     public bool selected = false;
+    public bool selectable = false;          // whether or not we can select this unit (used to avoid selecting units through the other side of the planet)
 
     // Unit Movement
     private Vector3 moveAxis = Vector3.zero;
@@ -124,5 +125,16 @@ public class Unit : MonoBehaviour {
             // we've made it to the target
             foundTarget = true;
         }
+    }
+
+
+    // Called by the camera when selecting units. Prevents selecting units that shouldn't be
+    public bool Select() {
+        if (selectable) selected = true;
+        return selectable;
+    }
+
+    public void Deselect() {
+        selected = false;
     }
 }

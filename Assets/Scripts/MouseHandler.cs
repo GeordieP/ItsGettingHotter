@@ -40,8 +40,10 @@ public class MouseHandler : MonoBehaviour {
                     Vector3 screenCoords = Camera.main.WorldToScreenPoint(unit.transform.position);
 
                     if (selectionBox.Contains(screenCoords)) {
-                        unit.SetSelected(true);
-                        selectedUnits.Add(unit);
+                        // Check if we're allowed to select the unit. If we are, add it to our list
+                        if (unit.Select()) {
+                            selectedUnits.Add(unit);
+                        }
                     }
                 }
             }
