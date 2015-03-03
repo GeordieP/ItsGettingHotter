@@ -73,18 +73,6 @@ public class Unit : MonoBehaviour {
         }
 	}
 
-    public void SetSelected(bool isSelected) {
-        selected = isSelected;
-    }
-
-    public void SetColor() {
-        idleColor = Color.blue;
-    }
-
-    public void UnsetColor() {
-        idleColor = Color.white;
-    }
-
     IEnumerator ExecuteTask() {
         this.renderer.material.color = Color.red;
         yield return new WaitForSeconds(currentTaskTime);
@@ -143,8 +131,9 @@ public class Unit : MonoBehaviour {
     }
 
     // Called by the camera when selecting units. Prevents selecting units that shouldn't be
+    // Selectable gets updated by the camera and should only be true when the unit is visible to the player
     public bool Select() {
-        if (selectable) selected = true;
+        selected = selectable;
         return selectable;
     }
 

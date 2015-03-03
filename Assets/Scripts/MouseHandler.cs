@@ -18,6 +18,8 @@ public class MouseHandler : MonoBehaviour {
         allUnits = GameObject.FindObjectsOfType<Unit>();
         selectedUnits = new List<Unit>();
 
+        //selectedUnits.AddRange(allUnits);
+
         selectionboxCanvas.enabled = false;
         selectionboxImage = selectionboxCanvas.transform.FindChild("Panel").gameObject;
     }
@@ -27,6 +29,10 @@ public class MouseHandler : MonoBehaviour {
         Ray theray;
         RaycastHit hitinfo;
 
+
+        // TODO: Combine these two into one if statement for MouseButton 0
+
+        // Handle unit selection
         if (Input.GetMouseButton(0)) {
             // currently dragging the mouse
             if (initialMousePos != Vector3.zero) {
@@ -37,10 +43,13 @@ public class MouseHandler : MonoBehaviour {
                 selectionboxImage.GetComponent<RectTransform>().sizeDelta = new Vector2(selectionBox.width, selectionBox.height);
 
                 foreach (Unit unit in allUnits) {
+                    // deselect the current unit before anything. this should prevent old units staying selected when we want to select a new bunch
+                    unit.Deselect();
+
                     Vector3 screenCoords = Camera.main.WorldToScreenPoint(unit.transform.position);
 
                     if (selectionBox.Contains(screenCoords)) {
-                        // Check if we're allowed to select the unit. If we are, add it to our list
+                        // Check if we're allowed to select the unit by calling unit.Select(). If we are, add it to our list (unit.Select() will also update the unit's selected status)
                         if (unit.Select()) {
                             selectedUnits.Add(unit);
                         }
@@ -49,17 +58,27 @@ public class MouseHandler : MonoBehaviour {
             }
         }
 
+        // Handle node selection
         if (Input.GetMouseButtonDown(0)) {
             theray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(theray, out hitinfo)) {
                 if (hitinfo.transform.gameObject.tag == "Node") {
+
                     foreach (Unit unit in selectedUnits) {
                         unit.AddTarget(hitinfo.transform.gameObject.transform);
                     }
+
+                    //foreach (Unit unit in allUnits) {
+                    //    unit.AddTarget(hitinfo.transform.gameObject.transform);
+                    //}
+
                     hitinfo.transform.GetComponent<Node>().ToggleSelected();
                 } else {
                     selectionboxCanvas.enabled = true;
                     initialMousePos = Input.mousePosition;
+
+                    // clear selected units list
+                    selectedUnits.Clear();
                 }
             }
         } else if (Input.GetMouseButtonUp(0)) {
