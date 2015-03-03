@@ -86,6 +86,8 @@ public class Unit : MonoBehaviour {
         targetNodes.RemoveAt(0);
         foundTarget = false;
 
+        print("memes:" + targetNodes.Count);
+
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
             state = States.Walking;
@@ -96,6 +98,7 @@ public class Unit : MonoBehaviour {
     }
 
     public void AddTarget(Transform _target) {
+        //print("adding  target");
         targetNodes.Add(_target);
 
         if (state == States.Idle) {
@@ -121,7 +124,7 @@ public class Unit : MonoBehaviour {
     }
 
     public void SnapToPlanetSurface() {
-        print("called");
+        //print("called");
         Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
         RaycastHit hit;
 

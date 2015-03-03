@@ -48,10 +48,18 @@ public class MouseHandler : MonoBehaviour {
 
                     Vector3 screenCoords = Camera.main.WorldToScreenPoint(unit.transform.position);
 
+
+                    // TODO: the problem is here - unit gets added once per frame if it's in the list
+                    // for now we can just do a shitty check and see if it's already in there
+                    // but a more elegant solution is needed
+
                     if (selectionBox.Contains(screenCoords)) {
                         // Check if we're allowed to select the unit by calling unit.Select(). If we are, add it to our list (unit.Select() will also update the unit's selected status)
                         if (unit.Select()) {
-                            selectedUnits.Add(unit);
+                            if (!selectedUnits.Contains(unit)) {
+                                print("adding unit");
+                                selectedUnits.Add(unit);
+                            }
                         }
                     }
                 }
@@ -60,13 +68,16 @@ public class MouseHandler : MonoBehaviour {
 
         // Handle node selection
         if (Input.GetMouseButtonDown(0)) {
+            print("ye");
             theray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(theray, out hitinfo)) {
                 if (hitinfo.transform.gameObject.tag == "Node") {
 
-                    foreach (Unit unit in selectedUnits) {
-                        unit.AddTarget(hitinfo.transform.gameObject.transform);
-                    }
+                    //foreach (Unit unit in selectedUnits) {
+                    //    unit.AddTarget(hitinfo.transform.gameObject.transform);
+                    //}
+
+                    AddAllTargets(hitinfo.transform.gameObject.transform);
 
                     //foreach (Unit unit in allUnits) {
                     //    unit.AddTarget(hitinfo.transform.gameObject.transform);
@@ -87,4 +98,11 @@ public class MouseHandler : MonoBehaviour {
             selectionboxCanvas.enabled = false;
         }
 	}
+
+    private void AddAllTargets(Transform targetTransform) {
+        print("called | selectedUnits length: " + selectedUnits.Count);
+        foreach (Unit unit in selectedUnits) {
+            unit.AddTarget(targetTransform);
+        }
+    }
 }
