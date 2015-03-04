@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Node : MonoBehaviour {
-
     public float taskTime = 0.5f;       // seconds
 
     private bool selected = false;
@@ -28,6 +27,7 @@ public class Node : MonoBehaviour {
         this.renderer.material.color = (selected) ? Color.green : Color.white;
     }
 
+    // TODO: this function needs some love, doesn't work entirely right
     private void SnapToPlanetSurface() {
         Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
         RaycastHit hit;

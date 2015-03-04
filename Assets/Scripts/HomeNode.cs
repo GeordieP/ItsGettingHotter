@@ -29,6 +29,6 @@ public class HomeNode : MonoBehaviour {
     }
 
     private Vector3 GetRandomVector() {
-        return new Vector3(Random.value, Random.value, 0.0f);
+        return new Vector3(Random.value, Random.value, Random.value);
     }
 }
