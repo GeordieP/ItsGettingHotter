@@ -1,14 +1,9 @@
-﻿/*
- * Created by Geordie Powers
- * Feb 5 2015
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class Unit : MonoBehaviour {
+    // TODO: Clean this class up
 
     // States
     private States state = States.Idle;
@@ -25,9 +20,8 @@ public class Unit : MonoBehaviour {
     private Transform currentTarget;
     private List<Transform> targetNodes;
     private bool foundTarget = false;
-
+    public Transform homeNode;
     // Unit
-    Color idleColor = Color.white;
     public bool selected = false;
     public bool selectable = false;          // whether or not we can select this unit (used to avoid selecting units through the other side of the planet)
     private float unitRadius = 0.0f;
@@ -42,7 +36,6 @@ public class Unit : MonoBehaviour {
         targetNodes = new List<Transform>();
 
         unitRadius = this.GetComponent<SphereCollider>().radius;
-        //unitRadius = this.transform.localScale.x;
 
         planet = GameObject.Find("Planet");     // TODO: replace this line when the global class is implemented, as it should have a reference to the planet at all times
 
@@ -53,17 +46,25 @@ public class Unit : MonoBehaviour {
 	void Update () {
         switch (state) {
             case States.Idle:
+<<<<<<< HEAD
                 //this.renderer.material.color = idleColor;
                 this.GetComponent<Renderer>().material.color = (selected) ? Color.blue : Color.white;
                 break;
             case States.Walking:
                 if (!foundTarget) {
                     this.GetComponent<Renderer>().material.color = Color.blue;
+=======
+                this.renderer.material.color = (selected) ? Color.blue : Color.white;
+                break;
+            case States.Walking:
+                if (!foundTarget) {
+                    this.renderer.material.color = Color.green;
+>>>>>>> 9d3fbf587e510ced0ecf073217d66c44e5cbc112
                     transform.RotateAround(planet.transform.position, moveAxis, speed * Time.deltaTime);
                 } else {
                     currentTaskTime = currentTarget.GetComponent<Node>().taskTime;      // time it takes to do a task is determined by the node itself for now - later it will also be influenced by the properties of the unit (movespeed taskspeed etc)
                     StartCoroutine(ExecuteTask());
-                    state = States.Working;
+                    ChangeState(States.Working);
                 }
                 break;
             case States.Working:
@@ -82,12 +83,16 @@ public class Unit : MonoBehaviour {
     }
 
     private void NextTarget() {
-        state = States.Idle;
+        ChangeState(States.Idle);
         targetNodes.RemoveAt(0);
         foundTarget = false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d3fbf587e510ced0ecf073217d66c44e5cbc112
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
-            state = States.Walking;
+            ChangeState(States.Walking);
         } else {
             // no more nodes left in the list
             // return to home node?
@@ -95,12 +100,11 @@ public class Unit : MonoBehaviour {
     }
 
     public void AddTarget(Transform _target) {
-        //print("adding  target");
         targetNodes.Add(_target);
 
         if (state == States.Idle) {
             SetTarget(targetNodes[0]);
-            state = States.Walking;
+            ChangeState(States.Walking);
         }
     }
 
@@ -109,7 +113,7 @@ public class Unit : MonoBehaviour {
         moveAxis = Vector3.Cross(this.transform.position, currentTarget.position);
 
         if (state == States.Idle) {
-            state = States.Walking;
+            ChangeState(States.Walking);
         }
     }
 
@@ -120,6 +124,7 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    // TODO: this function needs some love, doesn't work entirely right
     public void SnapToPlanetSurface() {
         Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
         RaycastHit hit;
@@ -129,8 +134,8 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    // Called by the camera when selecting units. Prevents selecting units that shouldn't be
-    // Selectable gets updated by the camera and should only be true when the unit is visible to the player
+    /* Called by the camera when selecting units. Prevents selecting units that shouldn't be
+        selectable gets updated by the camera and should only be true when the unit is visible to the player */
     public bool Select() {
         selected = selectable;
         return selectable;
@@ -138,5 +143,10 @@ public class Unit : MonoBehaviour {
 
     public void Deselect() {
         selected = false;
+    }
+
+    // Helper function for state changing so in the future we can make things happen when the state is changed if we need to (also for debugging)
+    void ChangeState(States state) {
+        this.state = state;
     }
 }
