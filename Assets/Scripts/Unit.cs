@@ -54,11 +54,11 @@ public class Unit : MonoBehaviour {
         switch (state) {
             case States.Idle:
                 //this.renderer.material.color = idleColor;
-                this.renderer.material.color = (selected) ? Color.blue : Color.white;
+                this.GetComponent<Renderer>().material.color = (selected) ? Color.blue : Color.white;
                 break;
             case States.Walking:
                 if (!foundTarget) {
-                    this.renderer.material.color = Color.blue;
+                    this.GetComponent<Renderer>().material.color = Color.blue;
                     transform.RotateAround(planet.transform.position, moveAxis, speed * Time.deltaTime);
                 } else {
                     currentTaskTime = currentTarget.GetComponent<Node>().taskTime;      // time it takes to do a task is determined by the node itself for now - later it will also be influenced by the properties of the unit (movespeed taskspeed etc)
@@ -74,7 +74,7 @@ public class Unit : MonoBehaviour {
 	}
 
     IEnumerator ExecuteTask() {
-        this.renderer.material.color = Color.red;
+        this.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(currentTaskTime);
         // task is completed, move on
         currentTarget.GetComponent<Node>().TaskCompleted();
@@ -85,9 +85,6 @@ public class Unit : MonoBehaviour {
         state = States.Idle;
         targetNodes.RemoveAt(0);
         foundTarget = false;
-
-        print("memes:" + targetNodes.Count);
-
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
             state = States.Walking;
@@ -124,7 +121,6 @@ public class Unit : MonoBehaviour {
     }
 
     public void SnapToPlanetSurface() {
-        //print("called");
         Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
         RaycastHit hit;
 

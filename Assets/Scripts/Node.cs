@@ -25,7 +25,7 @@ public class Node : MonoBehaviour {
     }
 
     private void UpdateColor() {
-        this.renderer.material.color = (selected) ? Color.green : Color.white;
+        this.GetComponent<Renderer>().material.color = (selected) ? Color.green : Color.white;
     }
 
     private void SnapToPlanetSurface() {
@@ -34,7 +34,7 @@ public class Node : MonoBehaviour {
 
         if (Physics.Raycast(theray, out hit)) {
             transform.position = Vector3.MoveTowards(this.transform.position, hit.point, hit.distance);
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            transform.rotation = Quaternion.FromToRotation(Vector3.down, hit.normal);       // the switch to unity 5 made this need to be Vec3.down rather than Vec3.Up, don't know why
         }
     }
 }
