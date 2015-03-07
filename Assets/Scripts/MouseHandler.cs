@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -55,10 +55,7 @@ public class MouseHandler : MonoBehaviour {
                         // Check if we're allowed to select the unit by calling unit.Select(). If we are, add it to our list (unit.Select() will also update the unit's selected status)
                         if (unit.Select()) {
                             if (!selectedUnits.Contains(unit)) {
-<<<<<<< HEAD
                                 //print("adding unit");
-=======
->>>>>>> 9d3fbf587e510ced0ecf073217d66c44e5cbc112
                                 selectedUnits.Add(unit);
                             }
                         }
@@ -69,12 +66,8 @@ public class MouseHandler : MonoBehaviour {
 
         // Handle node selection
         if (Input.GetMouseButtonDown(0)) {
-<<<<<<< HEAD
             //print("ye");
             theray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-=======
-            theray = camera.ScreenPointToRay(Input.mousePosition);
->>>>>>> 9d3fbf587e510ced0ecf073217d66c44e5cbc112
             if (Physics.Raycast(theray, out hitinfo)) {
                 // if the player clicks on a node, and not an unobstructed place on the planet
                 if (hitinfo.transform.gameObject.tag == "Node") {
@@ -82,13 +75,10 @@ public class MouseHandler : MonoBehaviour {
                     foreach (Unit unit in selectedUnits) {
                         unit.AddTarget(hitinfo.transform.gameObject.transform);
                     }
-<<<<<<< HEAD
 
                     //foreach (Unit unit in allUnits) {
                     //    unit.AddTarget(hitinfo.transform.gameObject.transform);
                     //}
-=======
->>>>>>> 9d3fbf587e510ced0ecf073217d66c44e5cbc112
 
                     hitinfo.transform.GetComponent<Node>().ToggleSelected();
                 } else {

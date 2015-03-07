@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -46,20 +46,12 @@ public class Unit : MonoBehaviour {
 	void Update () {
         switch (state) {
             case States.Idle:
-<<<<<<< HEAD
                 //this.renderer.material.color = idleColor;
                 this.GetComponent<Renderer>().material.color = (selected) ? Color.blue : Color.white;
                 break;
             case States.Walking:
                 if (!foundTarget) {
                     this.GetComponent<Renderer>().material.color = Color.blue;
-=======
-                this.renderer.material.color = (selected) ? Color.blue : Color.white;
-                break;
-            case States.Walking:
-                if (!foundTarget) {
-                    this.renderer.material.color = Color.green;
->>>>>>> 9d3fbf587e510ced0ecf073217d66c44e5cbc112
                     transform.RotateAround(planet.transform.position, moveAxis, speed * Time.deltaTime);
                 } else {
                     currentTaskTime = currentTarget.GetComponent<Node>().taskTime;      // time it takes to do a task is determined by the node itself for now - later it will also be influenced by the properties of the unit (movespeed taskspeed etc)
@@ -86,10 +78,7 @@ public class Unit : MonoBehaviour {
         ChangeState(States.Idle);
         targetNodes.RemoveAt(0);
         foundTarget = false;
-<<<<<<< HEAD
-=======
 
->>>>>>> 9d3fbf587e510ced0ecf073217d66c44e5cbc112
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
             ChangeState(States.Walking);
