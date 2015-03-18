@@ -2,39 +2,43 @@
 using System.Collections;
 
 public class Node : MonoBehaviour {
+
     public float taskTime = 0.5f;       // seconds
 
     private bool selected = false;
-    private GameObject planet;
-
 
     void Start() {
-        planet = GameObject.Find("Planet");
-        SnapToPlanetSurface();
+        //SnapToPlanetSurface();
     }
 
     public void ToggleSelected() {
         selected = !selected;
-        UpdateColor();
+        //UpdateColor();
     }
 
     public void TaskCompleted() {
         selected = false;
-        UpdateColor();
+        this.transform.gameObject.SetActive(false);
+        //UpdateColor();
+    }
+
+    public void TaskCompleted(bool isHomeNode) {
+        selected = false;
+        if (!isHomeNode) this.transform.gameObject.SetActive(false);
+        //UpdateColor();
     }
 
     private void UpdateColor() {
         this.GetComponent<Renderer>().material.color = (selected) ? Color.green : Color.white;
     }
 
-    // TODO: this function needs some love, doesn't work entirely right
-    private void SnapToPlanetSurface() {
-        Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
-        RaycastHit hit;
+    //private void SnapToPlanetSurface() {
+    //    Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
+    //    RaycastHit hit;
 
-        if (Physics.Raycast(theray, out hit)) {
-            transform.position = Vector3.MoveTowards(this.transform.position, hit.point, hit.distance);
-            transform.rotation = Quaternion.FromToRotation(Vector3.down, hit.normal);       // the switch to unity 5 made this need to be Vec3.down rather than Vec3.Up, don't know why
-        }
-    }
+    //    if (Physics.Raycast(theray, out hit)) {
+    //        transform.position = Vector3.MoveTowards(this.transform.position, hit.point, hit.distance);
+    //        transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+    //    }
+    //}
 }

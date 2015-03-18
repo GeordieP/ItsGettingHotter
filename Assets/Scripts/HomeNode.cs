@@ -2,33 +2,25 @@
 using System.Collections;
 
 public class HomeNode : MonoBehaviour {
-    public GameObject unitTemplate;
-    private GameObject tempUnit;
-    private Transform unitSpawnLocation;
+    public GameObject unitPrefab;
 
+	// Use this for initialization
 	void Start () {
-        unitSpawnLocation = transform.FindChild("UnitSpawnLoc");
-        SpawnUnits(10);
+        SpawnUnit(5);
 	}
-
-	void Update () {
 	
-	}
-
-    public void SpawnUnits(int numUnits) {
-        for (int i = 0; i < numUnits; i++) {
-            SpawnUnit();
+    void SpawnUnit(int numToSpawn = 1) {
+        for (int i = 0; i < numToSpawn; i++) {
+            GameObject tempUnit = Instantiate(unitPrefab, this.transform.position + RandomVec3(), Quaternion.identity) as GameObject;
+            tempUnit.GetComponent<Unit>().homeNode = this.transform;
+            tempUnit.transform.parent = this.transform;     // TODO: probably shouldnt parent the units to nodes, as when the node is destroyed as will be the child
+            //print(tempUnit.GetComponent<Unit>());
+            //Main.Instance.AllUnits.Add(tempUnit.GetComponent<Unit>());
         }
+        GameObject.Find("MAIN").GetComponent<ClickHandling>().RefreshAllUnitsList();
     }
 
-    public void SpawnUnit() {
-        if (unitSpawnLocation)
-            tempUnit = Instantiate(unitTemplate, unitSpawnLocation.position + GetRandomVector(), Quaternion.identity) as GameObject;
-        else
-            tempUnit = Instantiate(unitTemplate, this.transform.position, Quaternion.identity) as GameObject;
-    }
-
-    private Vector3 GetRandomVector() {
-        return new Vector3(Random.value, Random.value, Random.value);
+    private Vector3 RandomVec3() {
+        return new Vector3(Random.value, 0.0f, Random.value);
     }
 }

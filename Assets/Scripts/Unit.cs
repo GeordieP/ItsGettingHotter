@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Unit : MonoBehaviour {
-    // TODO: Clean this class up
-
     // States
     private States state = States.Idle;
     private enum States {
@@ -13,36 +11,31 @@ public class Unit : MonoBehaviour {
         Working
     }
 
-    // Planet
-    public GameObject planet;
-    
     // Nodes
     private Transform currentTarget;
     private List<Transform> targetNodes;
     private bool foundTarget = false;
     public Transform homeNode;
+
     // Unit
     public bool selected = false;
-    public bool selectable = false;          // whether or not we can select this unit (used to avoid selecting units through the other side of the planet)
+    public bool selectable = true;          // whether or not we can select this unit (used to avoid selecting units through the other side of the planet)
     private float unitRadius = 0.0f;
 
     // Unit Movement
     private Vector3 moveAxis = Vector3.zero;
-    private float speed = 10.3f;
+    private float speed = 4.0f;
     private float currentTaskTime = 0.0f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         targetNodes = new List<Transform>();
+        this.GetComponent<Renderer>().material.color = Color.blue;
 
         unitRadius = this.GetComponent<SphereCollider>().radius;
+        //SnapToPlanetSurface();
+    }
 
-        planet = GameObject.Find("Planet");     // TODO: replace this line when the global class is implemented, as it should have a reference to the planet at all times
-
-        SnapToPlanetSurface();
-	}
-
-	// Update is called once per frame
 	void Update () {
         switch (state) {
             case States.Idle:
@@ -52,7 +45,6 @@ public class Unit : MonoBehaviour {
             case States.Walking:
                 if (!foundTarget) {
                     this.GetComponent<Renderer>().material.color = Color.blue;
-                    transform.RotateAround(planet.transform.position, moveAxis, speed * Time.deltaTime);
                 } else {
                     currentTaskTime = currentTarget.GetComponent<Node>().taskTime;      // time it takes to do a task is determined by the node itself for now - later it will also be influenced by the properties of the unit (movespeed taskspeed etc)
                     StartCoroutine(ExecuteTask());
@@ -64,13 +56,15 @@ public class Unit : MonoBehaviour {
             default:
                 break;
         }
+
+        //this.GetComponent<Renderer>().material.color = Color.blue;
 	}
 
     IEnumerator ExecuteTask() {
         this.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(currentTaskTime);
         // task is completed, move on
-        currentTarget.GetComponent<Node>().TaskCompleted();
+        currentTarget.GetComponent<Node>().TaskCompleted(currentTarget == homeNode);
         NextTarget();
     }
 
@@ -84,7 +78,8 @@ public class Unit : MonoBehaviour {
             ChangeState(States.Walking);
         } else {
             // no more nodes left in the list
-            // return to home node?
+            // return to home node
+            AddTarget(homeNode);
         }
     }
 
@@ -113,21 +108,22 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    // TODO: this function needs some love, doesn't work entirely right
-    public void SnapToPlanetSurface() {
-        Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
-        RaycastHit hit;
+    //// TODO: this function needs some love, doesn't work entirely right
+    //public void SnapToPlanetSurface() {
+    //    Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
+    //    RaycastHit hit;
 
-        if (Physics.Raycast(theray, out hit)) {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, hit.point, hit.distance);
-        }
-    }
+    //    if (Physics.Raycast(theray, out hit)) {
+    //        this.transform.position = Vector3.MoveTowards(this.transform.position, hit.point, hit.distance);
+    //    }
+    //}
 
     /* Called by the camera when selecting units. Prevents selecting units that shouldn't be
         selectable gets updated by the camera and should only be true when the unit is visible to the player */
     public bool Select() {
-        selected = selectable;
-        return selectable;
+        transform.GetComponent<Renderer>().material.color = Color.blue;
+        selected = true;
+        return true;
     }
 
     public void Deselect() {
