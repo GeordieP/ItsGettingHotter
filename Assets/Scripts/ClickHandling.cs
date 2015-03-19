@@ -15,7 +15,7 @@ public class ClickHandling : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        // TODO: move unit collections from here to main
+        // TODO: move unit collections from here to main [?]
         RefreshAllUnitsList();
         selectedUnits = new List<Unit>();
 
@@ -39,7 +39,8 @@ public class ClickHandling : MonoBehaviour {
                 if (hitinfo.transform.gameObject.tag == "Node") {
                     //print("selected units length: " + selectedUnits.Count);
                     foreach (Unit unit in selectedUnits) {
-                        unit.AddTarget(hitinfo.transform.gameObject.transform);     // TODO: do we really need to do this much digging?
+                        // TODO: prevent a node from being added to the queue more than once
+                        unit.AddTarget(hitinfo.transform);
                     }
 
                     hitinfo.transform.GetComponent<Node>().ToggleSelected();
