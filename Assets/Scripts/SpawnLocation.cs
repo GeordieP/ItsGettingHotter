@@ -6,7 +6,6 @@ public class SpawnLocation : MonoBehaviour {
 
     // should suffice in most cases for accessing the node spawned at this location
     public Transform GetFirstChild() {
-        print("first child is " + transform.GetChild(0));
         return transform.GetChild(0);
     }
 }

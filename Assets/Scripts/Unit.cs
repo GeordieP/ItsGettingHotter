@@ -17,6 +17,12 @@ public class Unit : MonoBehaviour {
     private bool foundTarget = false;
     public Transform homeNode;
 
+    // Task
+    private UnitTask currentTask;
+
+	// Resource
+	private ResourcePackage carriedResource;
+
     // Unit
     public bool selected = false;
     public bool selectable = true;          // whether or not we can select this unit (used to avoid selecting units through the other side of the planet)
@@ -47,7 +53,8 @@ public class Unit : MonoBehaviour {
                     this.GetComponent<Renderer>().material.color = Color.blue;
                     transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, speed * Time.deltaTime);
                 } else {
-                    currentTaskTime = currentTarget.GetComponent<Node>().taskTime;      // time it takes to do a task is determined by the node itself for now - later it will also be influenced by the properties of the unit (movespeed taskspeed etc)
+                    currentTask = currentTarget.GetComponent<Node>().task;
+                    //currentTaskTime = currentTarget.GetComponent<Node>().taskTime;      // time it takes to do a task is determined by the node itself for now - later it will also be influenced by the properties of the unit (movespeed taskspeed etc)
                     StartCoroutine(ExecuteTask());
                     ChangeState(States.Working);
                 }
@@ -63,9 +70,23 @@ public class Unit : MonoBehaviour {
 
     IEnumerator ExecuteTask() {
         this.GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(currentTaskTime);
-        // task is completed, move on
-        currentTarget.GetComponent<Node>().TaskCompleted(currentTarget == homeNode);
+		// Wait until the task time is up
+        yield return new WaitForSeconds(currentTask.taskTime);
+		// Task time has passed, 
+
+		if (currentTarget == homeNode) {
+			// we're at the home node, deposit the resources we're carrying
+			// make sure we're not carrying nothing at some point, maybe not here but in the home node's intake function
+			currentTarget.GetComponent<Node>().TaskCompleted(currentTarget == homeNode);	// we can just probably pass in our carriedResource here (make sure to null check)
+			currentTarget.GetComponent<HomeNode>().AcceptResources(carriedResource);		// TODO: when we drop off resources, what should we do with what the unit is carrying?
+		} else {
+			// we're not at a home node, so gather as normal
+			// probably need a condition for Build nodes as well
+
+			// set our carried ResourcePackage to what was returned from the node when we call TaskCompleted
+			carriedResource = currentTarget.GetComponent<Node>().TaskCompleted();
+			//print("Picked up " + carriedResource.ResourceCount + " " + carriedResource.resourceType);
+		}
         NextTarget();
     }
 
@@ -107,16 +128,6 @@ public class Unit : MonoBehaviour {
             foundTarget = true;
         }
     }
-
-    //// TODO: this function needs some love, doesn't work entirely right
-    //public void SnapToPlanetSurface() {
-    //    Ray theray = new Ray(this.transform.position, (planet.transform.position - this.transform.position).normalized);
-    //    RaycastHit hit;
-
-    //    if (Physics.Raycast(theray, out hit)) {
-    //        this.transform.position = Vector3.MoveTowards(this.transform.position, hit.point, hit.distance);
-    //    }
-    //}
 
     /* Called by the camera when selecting units. Prevents selecting units that shouldn't be
         selectable gets updated by the camera and should only be true when the unit is visible to the player */

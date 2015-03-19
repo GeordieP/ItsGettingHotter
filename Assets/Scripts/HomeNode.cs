@@ -4,6 +4,8 @@ using System.Collections;
 public class HomeNode : MonoBehaviour {
     public GameObject unitPrefab;
 
+	private int WoodCount, IronCount, FoodCount;
+
 	// Use this for initialization
 	void Start () {
         SpawnUnit(5);
@@ -23,4 +25,23 @@ public class HomeNode : MonoBehaviour {
     private Vector3 RandomVec3() {
         return new Vector3(Random.value, 0.0f, Random.value);
     }
+
+	public void AcceptResources(ResourcePackage _resourcePackage) {
+		// Add the resources to their appropriate counter
+		switch (_resourcePackage.resourceType) {
+			case ResourcePackage.ResourceType.Wood:
+				WoodCount += _resourcePackage.ResourceCount;
+				GameObject.Find("MAIN").GetComponent<Main>().AddResource(ResourcePackage.ResourceType.Wood, _resourcePackage.ResourceCount);
+				//print("home node recieved " + _resourcePackage.ResourceCount + " wood");
+				break;
+			case ResourcePackage.ResourceType.Iron:
+				IronCount += _resourcePackage.ResourceCount;
+				break;
+			case ResourcePackage.ResourceType.Food:
+				FoodCount += _resourcePackage.ResourceCount;
+				break;
+			default:
+				break;
+		}
+	}
 }

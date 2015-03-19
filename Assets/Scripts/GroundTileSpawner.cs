@@ -82,6 +82,7 @@ public class GroundTileSpawner : MonoBehaviour {
     }
 
     private void SpawnNode(GameObject currentGroundTile, GameObject itemToSpawn) {
+		// TODO: implement a node type here so we can set up what kind of resources this node will hold
         currentGroundTile.GetComponent<GroundTile>().SpawnNode(itemToSpawn);
     }
 }
