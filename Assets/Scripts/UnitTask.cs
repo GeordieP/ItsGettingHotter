@@ -5,7 +5,7 @@ public abstract class UnitTask {
 	public float taskTime;										// How long (in seconds) the task takes to complete - should be set based on values in Balance class
     protected ResourcePackage resourcePackage;				// The resource package that this task will yield
 
-	//public abstract void ExecuteTask();
+    public virtual void ExecuteTask() { }
     public abstract ResourcePackage TaskCompleted();
 }
 

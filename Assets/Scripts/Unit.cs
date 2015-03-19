@@ -77,12 +77,11 @@ public class Unit : MonoBehaviour {
 		if (currentTarget == homeNode) {
 			// we're at the home node, deposit the resources we're carrying
 			// make sure we're not carrying nothing at some point, maybe not here but in the home node's intake function
-			currentTarget.GetComponent<Node>().TaskCompleted(currentTarget == homeNode);	// we can just probably pass in our carriedResource here (make sure to null check)
+			currentTarget.GetComponent<Node>().TaskCompleted(true);	// we can just probably pass in our carriedResource here (make sure to null check)
 			currentTarget.GetComponent<HomeNode>().AcceptResources(carriedResource);		// TODO: when we drop off resources, what should we do with what the unit is carrying?
 		} else {
 			// we're not at a home node, so gather as normal
 			// probably need a condition for Build nodes as well
-
 			// set our carried ResourcePackage to what was returned from the node when we call TaskCompleted
 			carriedResource = currentTarget.GetComponent<Node>().TaskCompleted();
 			//print("Picked up " + carriedResource.ResourceCount + " " + carriedResource.resourceType);

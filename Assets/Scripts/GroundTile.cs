@@ -20,7 +20,11 @@ public class GroundTile : MonoBehaviour {
 
                 //spawnLocations.Add(new Vector3((i) + transform.position.x, 1.5f, (j) + transform.position.z));
                 Vector3 location = new Vector3((i) + transform.position.x, 1.5f, (j) + transform.position.z);
-                GameObject lol = Instantiate(temp, location, Quaternion.identity) as GameObject;
+                GameObject lol = new GameObject();
+                lol.transform.position = location;
+                lol.AddComponent<SpawnLocation>();
+
+                //GameObject lol = Instantiate(temp, location, Quaternion.identity) as GameObject;
                 lol.transform.parent = this.transform.FindChild("GroundTileContent").transform;
                 spawnLocations.Add(lol.transform);
             }

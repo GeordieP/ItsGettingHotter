@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Node : MonoBehaviour {
 
-    public float taskTime = 0.5f;       // seconds
+    //public float taskTime = 0.5f;       // seconds
     public UnitTask task;                  // the task units will carry out at this node
 
     private bool selected = false;
@@ -27,6 +27,5 @@ public class Node : MonoBehaviour {
 
     public void TaskCompleted(bool isHomeNode) {
         selected = false;
-		//if (!isHomeNode) this.transform.gameObject.SetActive(false);
     }
 }

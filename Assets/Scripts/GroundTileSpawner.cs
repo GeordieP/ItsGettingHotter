@@ -77,7 +77,7 @@ public class GroundTileSpawner : MonoBehaviour {
     private void CreateSpawnLocObject(Vector3 pos) {
         GameObject spawnLoc;
         spawnLoc = Instantiate(empty, pos, Quaternion.identity) as GameObject;
-        spawnLoc.transform.parent = this.transform;
+        //spawnLoc.transform.parent = this.transform;
         spawnLocations.Add(spawnLoc.transform.position);
     }
 

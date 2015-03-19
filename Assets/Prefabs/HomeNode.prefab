@@ -14,6 +14,7 @@ GameObject:
   - 95: {fileID: 9525812}
   - 114: {fileID: 11434950}
   - 114: {fileID: 11467290}
+  - 135: {fileID: 13501642}
   m_Layer: 0
   m_Name: HomeNode
   m_TagString: Node
@@ -28,8 +29,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0569934845, y: -2.97134995, z: -4.69486427}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalPosition: {x: 9.45142555, y: 5.47932053, z: -11.4246979}
+  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -104,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adecca5fd42e9a24a911bba536f249e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskTime: .5
 --- !u!114 &11467290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,6 +117,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 129130, guid: 8fcc1517f76faa74aa3fd54b3afaa08b, type: 2}
+--- !u!135 &13501642
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

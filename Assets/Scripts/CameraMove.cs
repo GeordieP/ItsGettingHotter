@@ -19,8 +19,9 @@ public class CameraMove : MonoBehaviour {
             rotationVector.x += Input.GetAxis("Mouse X") * rotateSpeed;
         }
 
-        positionDelta.x += Input.GetAxis("Horizontal");
-        positionDelta.z += Input.GetAxis("Vertical");
+        // scale the axis vector based on how zoomed in we are
+        positionDelta.x += Input.GetAxis("Horizontal") * (distance * 0.05f);
+        positionDelta.z += Input.GetAxis("Vertical") * (distance * 0.05f);
 
         Quaternion rotation = Quaternion.Euler(rotationVector.y, rotationVector.x, 0);
         distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * distance, minDist, maxDist);
