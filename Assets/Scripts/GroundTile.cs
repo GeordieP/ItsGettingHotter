@@ -46,4 +46,12 @@ public class GroundTile : MonoBehaviour {
         newNode.transform.parent = spawnLocations[randomSpanwLoc].transform;
         nodeToSpawnAt.HasChild = true;
     }
+
+    void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+
+        foreach (Transform g in spawnLocations) {
+            Gizmos.DrawSphere(transform.position, 0.5f);
+        }
+    }
 }
