@@ -439,7 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTile: {fileID: 188122, guid: a5e8f81bfa2f301418e0eae089fb2ab3, type: 2}
   empty: {fileID: 136606, guid: 0c349e4e20307334c95374a66594cb92, type: 2}
-  cityGameObject: {fileID: 142056, guid: 6ff7ce631d7053845a2ee2a4ede1fbfe, type: 2}
+  cityGameObject: {fileID: 100000, guid: 172842e9113e9f94fb3c53bbb31d0e9a, type: 3}
   forestGameObject: {fileID: 152976, guid: 4a298dc863e07414793f9c4b436b63b8, type: 2}
 --- !u!4 &1475319412
 Transform:
