@@ -22,34 +22,74 @@ public class GroundTileSpawner : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            SpawnGroundTile();
+            //SpawnResourceTile();
+            SpawnCityTile();
+            //SpawnGroundTile();
         }
     }
 
     public void SpawnInitialGroundTiles() {
         // spawn 3 ground tiles initially
         print("initial tiles");
-        SpawnGroundTile();
+        SpawnCityTile();
         //SpawnGroundTile();
         //SpawnGroundTile();
+        //SpawnGroundTile();
+    }
+
+    // spawn a tile with a city on it
+    public void SpawnCityTile() {
+        int index = Random.Range(0, spawnLocations.Count - 1);
+        Vector3 location = spawnLocations[index];
+        GameObject groundTileObject = Instantiate(groundTile, location, Quaternion.identity) as GameObject;
+
+        SpawnNode(groundTileObject, cityGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+
+        CreateAdjacentSpawnLocations(groundTileObject.transform.position);
+
+        tileCount++;
+        spawnLocations.RemoveAt(index);
+    }
+
+
+    // spawn a tile with no cities, just resources
+    // maybe we'll be able to build cities on these later? who knows
+    public void SpawnResourceTile() {
+        int index = Random.Range(0, spawnLocations.Count - 1);
+        Vector3 location = spawnLocations[index];
+        GameObject groundTileObject = Instantiate(groundTile, location, Quaternion.identity) as GameObject;
+
+        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+
+        CreateAdjacentSpawnLocations(groundTileObject.transform.position);
+
+        tileCount++;
+        spawnLocations.RemoveAt(index);
     }
 
     public void SpawnGroundTile() {
         int index = Random.Range(0, spawnLocations.Count - 1);
         Vector3 location = spawnLocations[index];
-        GameObject tempNodeObject = Instantiate(groundTile, location, Quaternion.identity) as GameObject;
+        GameObject groundTileObject = Instantiate(groundTile, location, Quaternion.identity) as GameObject;
 
         if (tileCount == 0) {
-            SpawnNode(tempNodeObject, cityGameObject);
+            SpawnNode(groundTileObject, cityGameObject);
         } else {
             // spawn some extra trees
-            SpawnNode(tempNodeObject, forestGameObject);
+            SpawnNode(groundTileObject, forestGameObject);
         }
-        SpawnNode(tempNodeObject, forestGameObject);
-        SpawnNode(tempNodeObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, forestGameObject);
 
 
-        CreateAdjacentSpawnLocations(tempNodeObject.transform.position);
+        CreateAdjacentSpawnLocations(groundTileObject.transform.position);
 
         tileCount++;
         spawnLocations.RemoveAt(index);

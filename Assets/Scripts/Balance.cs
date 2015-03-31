@@ -6,6 +6,12 @@ public static class Balance {
     public const int IronResourceCount = 50;                    // Iron from a mine
     public const int FoodResourceCount = 100;                   // Food from a farm
 
+    // Amount of resources it will cost to build a new city
+    // This amount of each will be taken from the global resource pool each time a city spawns
+    public const int CityWoodCost = 500;
+    public const int CityIronCost = 0;
+    public const int CityFoodCost = 0;
+
 	// Task times (seconds)
 	public const float WoodTaskTime = 2.0f;
 	public const float IronTaskTime = 10.0f;

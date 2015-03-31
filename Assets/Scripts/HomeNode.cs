@@ -8,10 +8,19 @@ public class HomeNode : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        SpawnUnit(5);
+        StartCoroutine(SpawnUnitsDelayed());
+        GameObject.Find("MAIN").GetComponent<Main>().UseResources("Wood", Balance.CityWoodCost);
+        //SpawnUnit(5);
 	}
-	
+
+    // spawns units after a short delay
+    IEnumerator SpawnUnitsDelayed() {
+        yield return new WaitForSeconds(0.5f);
+        SpawnUnit(5);
+    }
+
     void SpawnUnit(int numToSpawn = 1) {
+        //print("spawnunit called");
         for (int i = 0; i < numToSpawn; i++) {
             GameObject tempUnit = Instantiate(unitPrefab, this.transform.position + RandomVec3() * 2, Quaternion.identity) as GameObject;
             tempUnit.GetComponent<Unit>().homeNode = this.transform;
@@ -44,5 +53,18 @@ public class HomeNode : MonoBehaviour {
 			default:
 				break;
 		}
+
+        CheckResourceCount();
 	}
+
+    private void CheckResourceCount() {
+        // doing it in main doesnst seem to work
+        GameObject.Find("MAIN").GetComponent<Main>().CheckResourceValues();
+
+        //if (WoodCount >= 500) {
+        //    // conditions to spawn a new tile and city
+        //    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
+        //    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
+        //}
+    }
 }
