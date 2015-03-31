@@ -37,7 +37,6 @@ public class ClickHandling : MonoBehaviour {
                 if (hitinfo.transform.gameObject.tag == "Node") {
                     //print("selected units length: " + selectedUnits.Count);
                     foreach (Unit unit in selectedUnits) {
-                        // TODO: prevent a node from being added to the queue more than once
                         unit.AddTarget(hitinfo.transform);
                     }
 

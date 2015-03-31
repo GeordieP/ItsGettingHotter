@@ -78,7 +78,7 @@ public class Unit : MonoBehaviour {
         //this.GetComponent<Renderer>().material.color = Color.red;
 		// Wait until the task time is up
         yield return new WaitForSeconds(currentTask.taskTime);
-		// Task time has passed, 
+		// Task time has passed
 
 		if (currentTarget == homeNode) {
 			// we're at the home node, deposit the resources we're carrying
