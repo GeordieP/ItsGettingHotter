@@ -13,7 +13,7 @@ public class HomeNode : MonoBehaviour {
 	
     void SpawnUnit(int numToSpawn = 1) {
         for (int i = 0; i < numToSpawn; i++) {
-            GameObject tempUnit = Instantiate(unitPrefab, this.transform.position + RandomVec3(), Quaternion.identity) as GameObject;
+            GameObject tempUnit = Instantiate(unitPrefab, this.transform.position + RandomVec3() * 2, Quaternion.identity) as GameObject;
             tempUnit.GetComponent<Unit>().homeNode = this.transform;
             //tempUnit.transform.parent = this.transform;     // TODO: probably shouldnt parent the units to nodes, as when the node is destroyed as will be the child
             //tempUnit.transform.parent

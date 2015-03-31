@@ -33,8 +33,6 @@ public class ClickHandling : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             iMousePos = Input.mousePosition;
 
-            // missing a line here, is it needed?
-
             if (Physics.Raycast(theray, out hitinfo)) {
                 if (hitinfo.transform.gameObject.tag == "Node") {
                     //print("selected units length: " + selectedUnits.Count);
