@@ -30,8 +30,8 @@ public class GroundTileSpawner : MonoBehaviour {
         // spawn 3 ground tiles initially
         print("initial tiles");
         SpawnGroundTile();
-        SpawnGroundTile();
-        SpawnGroundTile();
+        //SpawnGroundTile();
+        //SpawnGroundTile();
     }
 
     public void SpawnGroundTile() {

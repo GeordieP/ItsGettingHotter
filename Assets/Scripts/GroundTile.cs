@@ -13,6 +13,7 @@ public class GroundTile : MonoBehaviour {
         groundTileSize = 10;        // a tile is 10 units by 10 units
         int num = 10;
 
+        // creating the objects that represent sub-tile spawn locations (pre-determined locations where things like buildings can spawn on a tile)
         for (int i = -(num / 2) + 1; i < (num / 2); i += groundTileSize / (num / 2)) {
             for (int j = -(num / 2) + 1; j < (num / 2); j += groundTileSize / (num / 2)) {
                 // TODO: these are spawning at Y 0, so they'll probably be inside something. fix it

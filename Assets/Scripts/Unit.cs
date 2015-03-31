@@ -43,14 +43,20 @@ public class Unit : MonoBehaviour {
     }
 
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.T)) {
+            print("State: " + state);
+        }
+
         switch (state) {
             case States.Idle:
                 //this.renderer.material.color = idleColor;
                 this.GetComponent<Renderer>().material.color = (selected) ? Color.blue : Color.white;
+                //this.GetComponent<Renderer>().material.color = Color.green;
                 break;
             case States.Walking:
                 if (!foundTarget) {
                     this.GetComponent<Renderer>().material.color = Color.blue;
+                    transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, speed * Time.deltaTime);
                 } else {
                     currentTask = currentTarget.GetComponent<Node>().task;
                     //currentTaskTime = currentTarget.GetComponent<Node>().taskTime;      // time it takes to do a task is determined by the node itself for now - later it will also be influenced by the properties of the unit (movespeed taskspeed etc)
@@ -59,6 +65,7 @@ public class Unit : MonoBehaviour {
                 }
                 break;
             case States.Working:
+                this.GetComponent<Renderer>().material.color = Color.red;
                 break;
             default:
                 break;
@@ -68,7 +75,7 @@ public class Unit : MonoBehaviour {
 	}
 
     IEnumerator ExecuteTask() {
-        this.GetComponent<Renderer>().material.color = Color.red;
+        //this.GetComponent<Renderer>().material.color = Color.red;
 		// Wait until the task time is up
         yield return new WaitForSeconds(currentTask.taskTime);
 		// Task time has passed, 
@@ -90,8 +97,8 @@ public class Unit : MonoBehaviour {
 
     private void NextTarget() {
         ChangeState(States.Idle);
-        targetNodes.RemoveAt(0);
         foundTarget = false;
+        targetNodes.RemoveAt(0);
 
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
@@ -99,12 +106,15 @@ public class Unit : MonoBehaviour {
         } else {
             // no more nodes left in the list
             // return to home node
-            AddTarget(homeNode);
+            //AddTarget(homeNode);
         }
     }
 
     public void AddTarget(Transform _target) {
-        targetNodes.Add(_target);
+        // HACK: this is a shit way to do this
+        if (!targetNodes.Contains(_target)) {
+            targetNodes.Add(_target);
+        }
 
         if (state == States.Idle) {
             SetTarget(targetNodes[0]);
