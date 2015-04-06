@@ -30,7 +30,7 @@ public class CameraMove : MonoBehaviour {
 
         Vector3 newPosD = Quaternion.Euler(0, rotationVector.x, 0) * positionDelta;
 
-        Vector3 position = (rotation * distanceVector + target) + newPosD;
+        Vector3 position = (rotation * distanceVector) + newPosD;
         transform.position = position;
 	}
 }

@@ -164,6 +164,7 @@ GameObject:
   - 114: {fileID: 1041659983}
   - 114: {fileID: 1041659985}
   - 114: {fileID: 1041659986}
+  - 114: {fileID: 1041659987}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1041659976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 385805ad930d7254db700bbe10e0c0c5, type: 3}
   m_Name: 
@@ -344,6 +345,23 @@ MonoBehaviour:
   maxBlurSize: 2
   downsample: 0
   tiltShiftShader: {fileID: 4800000, guid: bf34d2a25450349699e8ae6456fa7ca9, type: 3}
+--- !u!114 &1041659987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1041659976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3be60277b366934e9a9e966dbc80977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 10
+  distance: 10
+  rotation: 0
+  rotSpeed: 2
+  moveSpeed: 8
+  target: {x: 0, y: 0, z: 0}
 --- !u!1 &1099758029
 GameObject:
   m_ObjectHideFlags: 0

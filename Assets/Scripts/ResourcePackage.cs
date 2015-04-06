@@ -13,7 +13,7 @@ public class ResourcePackage {
 
     public ResourcePackage() {
         resourceType = ResourceType.Wood;
-        resourceCount = Balance.WoodResourceCount;
+        resourceCount = 0;
     }
 
     public ResourcePackage(ResourceType _resourceType, int _resourceCount) {
