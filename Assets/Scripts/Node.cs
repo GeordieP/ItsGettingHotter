@@ -1,32 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Node : MonoBehaviour {
-    private bool selected = false;
+public abstract class Node : MonoBehaviour {
+	protected bool selected = false;
+	protected int WoodCount, IronCount, FoodCount;
 
-    void Start() {}
+	public abstract UnitTask GetTask();
+	public abstract void AcceptResources(ResourcePackage _resourcePackage);
 
 	public void ToggleSelected() {
 		selected = !selected;
 	}
 
-	public UnitTask GetTask() {
-		// TODO: this is where we really need to know the type of node -- probably decided based on the current transform's name (ugh) and stored in a local enum called NodeType or something
-
-		// TODO: change this when Node and HomeNode are set up a bit better!
-		if (gameObject.name.Contains("MiniCity")) {
-			// we're a city 
-			return new DepositTask();
-		} else if (gameObject.name.Contains("Forest")) {
-			// we're a forest
-			return new GatherTask(GatherTask.GatherType.Wood);		// for now only gather because we don't know what type nodes are yet
+	public void TakeResources(Balance.ResourceTypes _type, int _count) {
+		switch (_type) {
+			case Balance.ResourceTypes.Wood:
+				WoodCount -= _count;
+				break;
+			case Balance.ResourceTypes.Iron:
+				IronCount -= _count;
+				break;
+			case Balance.ResourceTypes.Food:
+				FoodCount -= _count;
+				break;
+			default:
+				break;
 		}
-		return new GatherTask(GatherTask.GatherType.Wood);		// for now only gather because we don't know what type nodes are yet
-	}
-
-	// should only ever get called on nodes that have resources, from GatherTask.TaskCompleted()
-	public void TakeResources(int amount) {
-		// TODO: Nodes need to keep track of their own resource count!
-		//print(string.Format("A unit has taken {0} resources", amount));
 	}
 }

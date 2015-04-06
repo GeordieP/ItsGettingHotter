@@ -15,7 +15,6 @@ public class ClickHandling : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        // TODO: move unit collections from here to main [?]
         RefreshAllUnitsList();
         selectedUnits = new List<Unit>();
 

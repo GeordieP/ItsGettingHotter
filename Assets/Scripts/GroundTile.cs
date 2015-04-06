@@ -16,9 +16,6 @@ public class GroundTile : MonoBehaviour {
         // creating the objects that represent sub-tile spawn locations (pre-determined locations where things like buildings can spawn on a tile)
         for (int i = -(num / 2) + 1; i < (num / 2); i += groundTileSize / (num / 2)) {
             for (int j = -(num / 2) + 1; j < (num / 2); j += groundTileSize / (num / 2)) {
-                // TODO: these are spawning at Y 0, so they'll probably be inside something. fix it
-                // what does the above comment even mean, is it relevant anymore?
-
                 //spawnLocations.Add(new Vector3((i) + transform.position.x, 1.5f, (j) + transform.position.z));
                 Vector3 location = new Vector3((i) + transform.position.x, 1.5f, (j) + transform.position.z);
                 GameObject lol = new GameObject();

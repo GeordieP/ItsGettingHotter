@@ -54,7 +54,6 @@ public class Unit : MonoBehaviour {
 
 	// Begin executing the task provided by the node we're at
 	void StartTask() {
-		// TODO: change this when Node and HomeNode are set up a bit better!
 		currentTask = currentTarget.GetComponent<Node>().GetTask();
 		StartCoroutine(WaitForTaskTime());
 	}
