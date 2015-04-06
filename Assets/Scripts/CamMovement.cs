@@ -27,23 +27,23 @@ public class CamMovement : MonoBehaviour {
 		{
 			transform.position += transform.forward * Time.deltaTime * Input.GetAxis("Mouse ScrollWheel") * moveSpeed * 100.0f;
 		}
+
 		//These all mose the camera based on which key is pressed
 		if(Input.GetKey(KeyCode.W))
 		{
 			transform.position += Vector3.Scale (transform.forward, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
 			target += Vector3.Scale (transform.forward, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
+		} else if (Input.GetKey(KeyCode.S))
+		{
+			transform.position += Vector3.Scale (-transform.forward, new Vector3(1, 0, 1)) * Time.deltaTime * moveSpeed;
+			target += Vector3.Scale(-transform.forward, new Vector3(1, 0, 1)) * Time.deltaTime * moveSpeed;
 		}
+
 		if(Input.GetKey(KeyCode.A))
 		{
 			transform.position += Vector3.Scale (-transform.right, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
 			target += Vector3.Scale (-transform.right, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
-		}
-		if(Input.GetKey(KeyCode.S))
-		{
-			transform.position += Vector3.Scale (-transform.forward, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
-			target += Vector3.Scale (-transform.forward, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
-		}
-		if(Input.GetKey(KeyCode.D))
+		} else if(Input.GetKey(KeyCode.D))
 		{
 			transform.position += Vector3.Scale (transform.right, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
 			target += Vector3.Scale (transform.right, new Vector3(1,0,1)) * Time.deltaTime * moveSpeed;
