@@ -58,6 +58,7 @@ public class DepositTask : UnitTask {
 
 	public override void TaskCompleted(Unit unit, Node node) {
 		resourcePackage = unit.TakeResourcePackage();
-		node.transform.GetComponent<HomeNode>().AcceptResources(resourcePackage);			// TODO: change this when Node and HomeNode are set up a bit better!
+		if (resourcePackage.ResourceCount > 0)		// only pass the package to the home node if there's something in it
+			node.transform.GetComponent<HomeNode>().AcceptResources(resourcePackage);			// TODO: change this when Node and HomeNode are set up a bit better!
 	}
 }

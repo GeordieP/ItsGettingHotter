@@ -76,8 +76,6 @@ public class ClickHandling : MonoBehaviour {
 	}
 
     public void RefreshAllUnitsList() {
-        //print("Before length :" + allUnits.Length);
         allUnits = GameObject.FindObjectsOfType<Unit>();
-        //print("after length :" + allUnits.Length);
     }
 }
