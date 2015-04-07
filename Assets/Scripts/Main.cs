@@ -14,17 +14,17 @@ public class Main : MonoBehaviour {
         WoodCount = Balance.CityWoodCost;
     }
 
-	public void AddResource(ResourcePackage.ResourceType _resourceType, int count) {
+	public void AddResource(Balance.ResourceTypes _resourceType, int count) {
 		// Add the resources to their appropriate counter
 		switch (_resourceType) {
-			case ResourcePackage.ResourceType.Wood:
+			case Balance.ResourceTypes.Wood:
 				WoodCount += count;
                 UpdateGUI();
 				break;
-			case ResourcePackage.ResourceType.Iron:
+			case Balance.ResourceTypes.Iron:
 				IronCount += count;
 				break;
-			case ResourcePackage.ResourceType.Food:
+			case Balance.ResourceTypes.Food:
 				FoodCount += count;
 				break;
 			default:

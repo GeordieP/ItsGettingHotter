@@ -15,30 +15,23 @@ public abstract class UnitTask : MonoBehaviour {
 }
 
 public class GatherTask : UnitTask {
-    public enum GatherType { Wood, Iron, Food }
-    public GatherType gatherType;
+	Balance.ResourceTypes resourceType;
 
-    public GatherTask() {
-        gatherType = GatherType.Wood;
-		taskTime = Balance.WoodTaskTime;
-		resourcePackage = new ResourcePackage(ResourcePackage.ResourceType.Wood, Balance.WoodResourceCount);
-    }
+    public GatherTask(Balance.ResourceTypes _resourceType) {
+		resourceType = _resourceType;
 
-    public GatherTask(GatherType _gatherType) {
-        gatherType = _gatherType;
-
-		switch (gatherType) {
-			case GatherType.Wood:
+		switch (_resourceType) {
+			case Balance.ResourceTypes.Wood:
 				taskTime = Balance.WoodTaskTime;
-				resourcePackage = new ResourcePackage(ResourcePackage.ResourceType.Wood, Balance.WoodResourceCount);
+				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Wood, Balance.WoodResourceCount);
 				break;
-			case GatherType.Iron:
+			case Balance.ResourceTypes.Iron:
 				taskTime = Balance.FoodTaskTime;
-				resourcePackage = new ResourcePackage(ResourcePackage.ResourceType.Iron, Balance.IronResourceCount);
+				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Iron, Balance.IronResourceCount);
 				break;
-			case GatherType.Food:
+			case Balance.ResourceTypes.Food:
 				taskTime = Balance.FoodTaskTime;
-				resourcePackage = new ResourcePackage(ResourcePackage.ResourceType.Food, Balance.FoodResourceCount);
+				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Food, Balance.FoodResourceCount);
 				break;
 			default:
 				break;
@@ -46,7 +39,7 @@ public class GatherTask : UnitTask {
     }
 
     public override void TaskCompleted(Unit unit, Node node) {
-		node.TakeResources(resourcePackage.ResourceCount);
+		node.TakeResources(resourceType, resourcePackage.ResourceCount);
 		unit.AcceptResourcePackage(resourcePackage);
     }
 }
@@ -58,7 +51,7 @@ public class DepositTask : UnitTask {
 
 	public override void TaskCompleted(Unit unit, Node node) {
 		resourcePackage = unit.TakeResourcePackage();
-		if (resourcePackage.ResourceCount > 0)		// only pass the package to the home node if there's something in it
-			node.transform.GetComponent<HomeNode>().AcceptResources(resourcePackage);			// TODO: change this when Node and HomeNode are set up a bit better!
+		if (resourcePackage.ResourceCount > 0)		// only pass the package to the node if there's something in it
+			node.transform.GetComponent<Node>().AcceptResources(resourcePackage);
 	}
 }

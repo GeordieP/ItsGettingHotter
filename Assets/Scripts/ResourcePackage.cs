@@ -2,8 +2,10 @@
 using System.Collections;
 
 public class ResourcePackage {
-    public enum ResourceType { Wood, Iron, Food }
-    public ResourceType resourceType;			// TODO: this should be private, fix after testing
+	private Balance.ResourceTypes resourceType;
+	public Balance.ResourceTypes ResourceType {
+		get { return resourceType; }
+	}
 
 	private int resourceCount;
 	public int ResourceCount {
@@ -12,11 +14,11 @@ public class ResourcePackage {
 	}	
 
     public ResourcePackage() {
-        resourceType = ResourceType.Wood;
+        resourceType = Balance.ResourceTypes.Wood;
         resourceCount = 0;
     }
 
-    public ResourcePackage(ResourceType _resourceType, int _resourceCount) {
+    public ResourcePackage(Balance.ResourceTypes _resourceType, int _resourceCount) {
         resourceType = _resourceType;
         resourceCount = _resourceCount;
     }
