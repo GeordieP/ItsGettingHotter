@@ -25,13 +25,13 @@ public class GatherTask : UnitTask {
 				taskTime = Balance.WoodTaskTime;
 				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Wood, Balance.WoodResourceCount);
 				break;
-			case Balance.ResourceTypes.Iron:
-				taskTime = Balance.FoodTaskTime;
-				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Iron, Balance.IronResourceCount);
-				break;
 			case Balance.ResourceTypes.Food:
 				taskTime = Balance.FoodTaskTime;
 				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Food, Balance.FoodResourceCount);
+				break;
+			case Balance.ResourceTypes.Oil:
+				taskTime = Balance.FoodTaskTime;
+				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Oil, Balance.OilResourceCount);
 				break;
 			default:
 				break;
