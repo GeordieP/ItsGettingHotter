@@ -233,7 +233,7 @@ GameObject:
   - 222: {fileID: 22256252}
   - 114: {fileID: 11476308}
   m_Layer: 5
-  m_Name: Green
+  m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,7 +266,7 @@ GameObject:
   - 222: {fileID: 22293188}
   - 114: {fileID: 11476536}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NodeNameText: {fileID: 193704}
-  HealthBar: {fileID: 182808}
+  HealthBar: {fileID: 177328}
   WoodCountText: {fileID: 126780}
   FoodCountText: {fileID: 100830}
   OilCountText: {fileID: 133838}
@@ -1098,11 +1098,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22458566}
   m_RootOrder: 1
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: .149996161, y: -.5}
-  m_SizeDelta: {x: 180.300003, y: 5}
-  m_Pivot: {x: .5, y: .5}
+  m_AnchorMin: {x: 0, y: .5}
+  m_AnchorMax: {x: 0, y: .5}
+  m_AnchoredPosition: {x: 1.52587891e-05, y: 1.04904175e-05}
+  m_SizeDelta: {x: 180.299988, y: 5}
+  m_Pivot: {x: 0, y: .5}
 --- !u!224 &22447044
 RectTransform:
   m_ObjectHideFlags: 1

@@ -45,11 +45,10 @@ public class GroundTile : MonoBehaviour {
         nodeToSpawnAt.HasChild = true;
     }
 
-    void OnDrawGizmos() {
-        Gizmos.color = Color.yellow;
-
-        foreach (Transform g in spawnLocations) {
-            Gizmos.DrawSphere(transform.position, 0.5f);
-        }
-    }
+	//private void OnDrawGizmos() {
+	//	Gizmos.color = Color.yellow;
+	//	foreach (Transform g in spawnLocations) {
+	//		Gizmos.DrawSphere(g.position, 0.5f);
+	//	}
+	//}
 }

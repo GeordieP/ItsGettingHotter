@@ -16,7 +16,7 @@ public static class Balance {
 	public const int CityOilCost = 0;
 
 	// Amount of each resource a city will spawn with
-	public const int CityWoodStartCount = 0;
+	public const int CityWoodStartCount = 1000;
 	public const int CityFoodStartCount = 0;
 	public const int CityOilStartCount = 0;
 

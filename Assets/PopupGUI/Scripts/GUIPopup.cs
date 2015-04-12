@@ -6,8 +6,10 @@ public class GUIPopup : MonoBehaviour {
 
     public GameObject NodeNameText, HealthBar, WoodCountText, FoodCountText, OilCountText;
 	private Node target;
+	private Vector2 healthBarStartSize;
 
 	void Start () {
+		healthBarStartSize = HealthBar.GetComponent<RectTransform>().sizeDelta;
 		Disable();
 	}
 
@@ -46,5 +48,9 @@ public class GUIPopup : MonoBehaviour {
 		WoodCountText.GetComponent<Text>().text = _woodCount.ToString();
 		FoodCountText.GetComponent<Text>().text = _foodCount.ToString();
 		OilCountText.GetComponent<Text>().text = _oilCount.ToString();
+	}
+
+	public void UpdateHealthBar(float _percent) {
+		HealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(healthBarStartSize.x * _percent, healthBarStartSize.y);
 	}
 }

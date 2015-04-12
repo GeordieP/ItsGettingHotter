@@ -5,12 +5,19 @@ public class CityNode : Node {
 	public GameObject unitPrefab;
 
 	void Start() {
+		// Do everything in init so we can call init on base as well
+		Init();
+	}
+
+	protected override void Init() {
 		NodeName = "City";
 		StartCoroutine(SpawnUnitsDelayed());
 
 		WoodCount = Balance.CityWoodStartCount;
 		OilCount = Balance.CityOilStartCount;
 		FoodCount = Balance.CityFoodStartCount;
+
+		base.Init();
 	}
 
 	private IEnumerator SpawnUnitsDelayed() {

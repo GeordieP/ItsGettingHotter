@@ -3,15 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public abstract class UnitTask : MonoBehaviour {
+public abstract class UnitTask {
 	public float taskTime;										// How long (in seconds) the task takes to complete - should be set based on values in Balance class
     protected ResourcePackage resourcePackage;				// The resource package that gets moved through the task, in one direction or another
 
 	public abstract void TaskCompleted(Unit unit, Node node);
-
-	private IEnumerator WaitForTaskTime() {
-		yield return new WaitForSeconds(taskTime);
-	}
 }
 
 public class GatherTask : UnitTask {

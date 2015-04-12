@@ -5,8 +5,16 @@ public abstract class Node : MonoBehaviour {
 	protected bool selected = false;
 	protected int WoodCount, FoodCount, OilCount;
 	protected string NodeName = "GenericNode";
+	protected float maxHealth = 1f;
+	protected float health = 1f;
 
 	private GUIPopup guiPopup;
+
+	protected virtual void Init() {
+		// for now set the max health to double the start count of each resource, and current to half of max
+		maxHealth = (WoodCount + OilCount + FoodCount) * 2;
+		health = maxHealth / 2;
+	}
 
 	public abstract UnitTask GetTask();
 
@@ -28,21 +36,27 @@ public abstract class Node : MonoBehaviour {
 			default:
 				break;
 		}
+		health = WoodCount + OilCount + FoodCount;
 
-		if (guiPopup) {
-			guiPopup.UpdateResourceText(WoodCount, FoodCount, OilCount);
-		}
+		UpdateAttachedGUI();
 	}
 
 	public virtual void AcceptResources(ResourcePackage _resourcePackage) {
-		if (guiPopup) {
-			guiPopup.UpdateResourceText(WoodCount, FoodCount, OilCount);
-		}
+		health = WoodCount + OilCount + FoodCount;
+
+		UpdateAttachedGUI();
 	}
 
 	public void AttachPopup(GUIPopup _guiPopup) {
 		guiPopup = _guiPopup;
-		guiPopup.UpdateText(NodeName, WoodCount, FoodCount, OilCount);
+		UpdateAttachedGUI();
+	}
+
+	private void UpdateAttachedGUI() {
+		if (guiPopup) {
+			guiPopup.UpdateText(NodeName, WoodCount, FoodCount, OilCount);
+			guiPopup.UpdateHealthBar(health / maxHealth);
+		}
 	}
 
 	public void DetachPopup() {

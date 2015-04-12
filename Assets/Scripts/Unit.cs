@@ -90,10 +90,7 @@ public class Unit : MonoBehaviour {
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
             ChangeState(States.Walking);
-        } else {
-            // no more nodes left in the list
-            // return to home node?
-        }
+        }	// else no more nodes left in the list
     }
 
     public void AddTarget(Transform _target) {
@@ -142,5 +139,3 @@ public class Unit : MonoBehaviour {
         this.state = state;
     }
 }
-
-// test
