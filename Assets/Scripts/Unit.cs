@@ -40,17 +40,11 @@ public class Unit : MonoBehaviour {
 	void Update () {
 		switch (state) {
 			case States.Idle:
-				//renderers [1].enabled = true;
-				this.GetComponent<Renderer>().material.color = (selected) ? Color.blue : Color.white;
 				break;
 			case States.Walking:
-				renderers [1].enabled = true;
-				this.GetComponent<Renderer>().material.color = Color.green;
 				transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, speed * Time.deltaTime);
 				break;
 		case States.Working:
-				renderers [1].enabled = true;
-				this.GetComponent<Renderer>().material.color = Color.red;
 				break;
 			default:
 				break;
