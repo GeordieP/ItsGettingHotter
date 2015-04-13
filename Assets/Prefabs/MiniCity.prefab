@@ -11,9 +11,8 @@ GameObject:
   - 33: {fileID: 3374018}
   - 23: {fileID: 2334854}
   - 95: {fileID: 9566492}
-  - 114: {fileID: 11499932}
-  - 114: {fileID: 11440192}
   - 65: {fileID: 6508968}
+  - 114: {fileID: 11433610}
   m_Layer: 0
   m_Name: MiniCity
   m_TagString: Node
@@ -101,7 +100,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11440192
+--- !u!114 &11433610
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,18 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 144984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adecca5fd42e9a24a911bba536f249e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11499932
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16a1ca02e69968c4f82a15a825e6de75, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a7ed6b7413b31e49b1c40adf90f0e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 169310, guid: 77db8be8ddf33ad47ae0185c7248e771, type: 2}

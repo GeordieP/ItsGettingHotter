@@ -59,7 +59,6 @@ public class Unit : MonoBehaviour {
 
 	// Begin executing the task provided by the node we're at
 	void StartTask() {
-		// TODO: change this when Node and HomeNode are set up a bit better!
 		currentTask = currentTarget.GetComponent<Node>().GetTask();
 		StartCoroutine(WaitForTaskTime());
 	}
@@ -96,10 +95,7 @@ public class Unit : MonoBehaviour {
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
             ChangeState(States.Walking);
-        } else {
-            // no more nodes left in the list
-            // return to home node?
-        }
+        }	// else no more nodes left in the list
     }
 
     public void AddTarget(Transform _target) {
@@ -150,5 +146,3 @@ public class Unit : MonoBehaviour {
         this.state = state;
     }
 }
-
-// test

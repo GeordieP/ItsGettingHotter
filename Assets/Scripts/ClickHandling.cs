@@ -15,7 +15,6 @@ public class ClickHandling : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        // TODO: move unit collections from here to main [?]
         RefreshAllUnitsList();
         selectedUnits = new List<Unit>();
 
@@ -30,23 +29,31 @@ public class ClickHandling : MonoBehaviour {
 
         theray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
+		// Button Clicked
         if (Input.GetMouseButtonDown(0)) {
             iMousePos = Input.mousePosition;
 
             if (Physics.Raycast(theray, out hitinfo)) {
                 if (hitinfo.transform.gameObject.tag == "Node") {
-                    //print("selected units length: " + selectedUnits.Count);
-                    foreach (Unit unit in selectedUnits) {
-                        unit.AddTarget(hitinfo.transform);
-                    }
+					if (Input.GetKey(KeyCode.LeftControl)) {
+						this.GetComponent<Main>().EnableNodePopupGUI(hitinfo.transform.GetComponent<Node>());
+					} else {
+						foreach (Unit unit in selectedUnits) {
+							unit.AddTarget(hitinfo.transform);
+						}
 
-                    hitinfo.transform.GetComponent<Node>().ToggleSelected();
+						hitinfo.transform.GetComponent<Node>().ToggleSelected();
+					}
                 } else {
                     selectedUnits.Clear();
+					if (Input.GetKey(KeyCode.LeftControl)) {
+						this.GetComponent<Main>().DisableNodePopupGUI();
+					}
                 }
             }
         }
 
+		// Button Held
         if (Input.GetMouseButton(0)) {
             fMousePos = Input.mousePosition;
             Rect selectionBox = new Rect(Mathf.Min(iMousePos.x, fMousePos.x), Mathf.Min(iMousePos.y, fMousePos.y), Mathf.Abs(iMousePos.x - fMousePos.x), Mathf.Abs(iMousePos.y - fMousePos.y));

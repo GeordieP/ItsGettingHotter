@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 
 public static class Balance {
-    // Amount of resources the respective node offers
-    public const int WoodResourceCount = 50;                  // Wood from a forest
-    public const int IronResourceCount = 50;                    // Iron from a mine
-    public const int FoodResourceCount = 100;                   // Food from a farm
+	// All types of resources available
+	public enum ResourceTypes { Wood, Food, Oil};
 
-    // Amount of resources it will cost to build a new city
-    // This amount of each will be taken from the global resource pool each time a city spawns
-    public const int CityWoodCost = 500;
-    public const int CityIronCost = 0;
-    public const int CityFoodCost = 0;
+	// Amount of resources the respective node offers
+	public const int WoodResourceCount = 50;						// Wood from a forest
+	public const int FoodResourceCount = 100;						// Food from a farm
+	public const int OilResourceCount = 50;							// Oil from an oil rig
+
+	// Amount of resources it will cost to build a new city
+	// This amount of each will be taken from the global resource pool each time a city spawns
+	public const int CityWoodCost = 500;
+	public const int CityFoodCost = 0;
+	public const int CityOilCost = 0;
+
+	// Amount of each resource a city will spawn with
+	public const int CityWoodStartCount = 1000;
+	public const int CityFoodStartCount = 0;
+	public const int CityOilStartCount = 0;
 
 	// Task times (seconds)
 	public const float WoodTaskTime = 2.0f;
-	public const float IronTaskTime = 10.0f;
+	public const float OilTaskTime = 10.0f;
 	public const float FoodTaskTime = 7.0f;
 }
 

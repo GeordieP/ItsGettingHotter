@@ -234,8 +234,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 486188}
   - 135: {fileID: 13579476}
-  - 114: {fileID: 11466048}
   - 54: {fileID: 5485842}
+  - 114: {fileID: 11488082}
   m_Layer: 0
   m_Name: Forest
   m_TagString: Node
@@ -1277,7 +1277,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11466048
+--- !u!114 &11488082
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1285,10 +1285,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 152976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adecca5fd42e9a24a911bba536f249e6, type: 3}
+  m_Script: {fileID: 11500000, guid: ef4bb3d4bef2f384d89c0ae48d55442b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  task: {fileID: 0}
 --- !u!135 &13579476
 SphereCollider:
   m_ObjectHideFlags: 1
