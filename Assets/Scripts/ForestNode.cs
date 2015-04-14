@@ -3,10 +3,18 @@ using System.Collections;
 
 public class ForestNode : Node {
 	void Start() {
+		// Do everything in init so we can call init on base as well
+		Init();
+	}
+
+	protected override void Init() {
+		NodeName = "Forest";
 		// Forest starts with max wood count, and zero of other resources
 		WoodCount = Balance.WoodResourceCount;
-		IronCount = 0;
 		FoodCount = 0;
+		OilCount = 0;
+
+		base.Init();
 	}
 
 	public override UnitTask GetTask() {

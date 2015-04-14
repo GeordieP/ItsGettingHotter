@@ -167,7 +167,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 467054}
-  - 205: {fileID: 20521330}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -237,7 +236,6 @@ GameObject:
   - 135: {fileID: 13579476}
   - 54: {fileID: 5485842}
   - 114: {fileID: 11488082}
-  - 205: {fileID: 20529790}
   m_Layer: 0
   m_Name: Forest
   m_TagString: Node
@@ -1302,50 +1300,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: .300000012, z: 0}
---- !u!205 &20521330
-LODGroup:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138462}
-  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
-  m_Size: 1
-  m_LODs:
-  - screenRelativeHeight: .600000024
-    fadeMode: 0
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: .300000012
-    fadeMode: 0
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: .100000001
-    fadeMode: 0
-    fadeTransitionWidth: 0
-    renderers: []
-  m_Enabled: 1
---- !u!205 &20529790
-LODGroup:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152976}
-  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
-  m_Size: 1
-  m_LODs:
-  - screenRelativeHeight: .600000024
-    fadeMode: 0
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: .300000012
-    fadeMode: 0
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: .100000001
-    fadeMode: 0
-    fadeTransitionWidth: 0
-    renderers: []
-  m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

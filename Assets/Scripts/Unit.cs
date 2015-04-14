@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour {
 
     // Unit
     public bool selected = false;
+	public Renderer[] renderers;
 
 	// Unit Movement
     private Vector3 moveAxis = Vector3.zero;
@@ -33,19 +34,17 @@ public class Unit : MonoBehaviour {
     void Start() {
         targetNodes = new List<Transform>();
 		carriedResource = new ResourcePackage();
+		renderers = GetComponentsInChildren<Renderer>();
     }
 
 	void Update () {
 		switch (state) {
 			case States.Idle:
-				this.GetComponent<Renderer>().material.color = (selected) ? Color.blue : Color.white;
 				break;
 			case States.Walking:
-				this.GetComponent<Renderer>().material.color = Color.green;
 				transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, speed * Time.deltaTime);
 				break;
-			case States.Working:
-				this.GetComponent<Renderer>().material.color = Color.red;
+		case States.Working:
 				break;
 			default:
 				break;
@@ -90,10 +89,7 @@ public class Unit : MonoBehaviour {
         if (targetNodes.Count > 0) {
             SetTarget(targetNodes[0]);
             ChangeState(States.Walking);
-        } else {
-            // no more nodes left in the list
-            // return to home node?
-        }
+        }	// else no more nodes left in the list
     }
 
     public void AddTarget(Transform _target) {
@@ -129,11 +125,13 @@ public class Unit : MonoBehaviour {
     /* Called by the camera when selecting units. Prevents selecting units that shouldn't be
         selectable gets updated by the camera and should only be true when the unit is visible to the player */
     public bool Select() {
+		renderers [1].enabled = true;
         selected = true;
         return true;
     }
 
     public void Deselect() {
+		renderers [1].enabled = false;
         selected = false;
     }
 
@@ -142,5 +140,3 @@ public class Unit : MonoBehaviour {
         this.state = state;
     }
 }
-
-// test

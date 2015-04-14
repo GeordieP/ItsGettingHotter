@@ -5,11 +5,19 @@ public class CityNode : Node {
 	public GameObject unitPrefab;
 
 	void Start() {
+		// Do everything in init so we can call init on base as well
+		Init();
+	}
+
+	protected override void Init() {
+		NodeName = "City";
 		StartCoroutine(SpawnUnitsDelayed());
 
 		WoodCount = Balance.CityWoodStartCount;
-		IronCount = Balance.CityIronStartCount;
+		OilCount = Balance.CityOilStartCount;
 		FoodCount = Balance.CityFoodStartCount;
+
+		base.Init();
 	}
 
 	private IEnumerator SpawnUnitsDelayed() {
@@ -39,8 +47,8 @@ public class CityNode : Node {
 				WoodCount += _resourcePackage.ResourceCount;
 				GameObject.Find("MAIN").GetComponent<Main>().AddResource(Balance.ResourceTypes.Wood, _resourcePackage.ResourceCount);
 				break;
-			case Balance.ResourceTypes.Iron:
-				IronCount += _resourcePackage.ResourceCount;
+			case Balance.ResourceTypes.Oil:
+				OilCount += _resourcePackage.ResourceCount;
 				break;
 			case Balance.ResourceTypes.Food:
 				FoodCount += _resourcePackage.ResourceCount;
@@ -49,6 +57,8 @@ public class CityNode : Node {
 				break;
 		}
 
+		// this will just update the attached GUI - easier to have the update call in 
+		base.AcceptResources(_resourcePackage);
 		CheckResourceCount();
 	}
 
