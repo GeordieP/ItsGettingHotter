@@ -10,11 +10,8 @@ public class GroundTileSpawner : MonoBehaviour {
     private int tileCount = 0;
     public GameObject cityGameObject;
     public GameObject forestGameObject;
-<<<<<<< HEAD
     public GameObject oilGameObject;
-=======
 	public GameObject farmGameObject;
->>>>>>> Brad
 
     void Awake() {
         spawnLocations = new List<Vector3>();
