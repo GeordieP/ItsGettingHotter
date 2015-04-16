@@ -487,6 +487,7 @@ MonoBehaviour:
   empty: {fileID: 136606, guid: 0c349e4e20307334c95374a66594cb92, type: 2}
   cityGameObject: {fileID: 144984, guid: 212eac59c1ff001489540b9a9691b0c5, type: 2}
   forestGameObject: {fileID: 152976, guid: 4a298dc863e07414793f9c4b436b63b8, type: 2}
+  oilGameObject: {fileID: 114586, guid: de0269cc8c09df7479ae4c6d507aa506, type: 2}
 --- !u!4 &1475319412
 Transform:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class GatherTask : UnitTask {
 				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Food, Balance.FoodResourceCount);
 				break;
 			case Balance.ResourceTypes.Oil:
-				taskTime = Balance.FoodTaskTime;
+				taskTime = Balance.OilTaskTime;
 				resourcePackage = new ResourcePackage(Balance.ResourceTypes.Oil, Balance.OilResourceCount);
 				break;
 			default:
