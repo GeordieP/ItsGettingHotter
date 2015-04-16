@@ -9,7 +9,14 @@ public class Main : MonoBehaviour {
 	public GameObject GUIPopupObject;		// The single GUI element prefab for the popup GUI
 	private GUIPopup guiPopupScript;			// a reference to the main script of the GUI Popup Object
 
+	// Regarding the standalone healthbars to display above each city node
+	public GameObject StandaloneHealthbarPrefab;
+	public Canvas UICanvasReference;
+	private Transform CityHealthbarContainer;		// holds all the city health bars we create
+
     void Start() {
+		CityHealthbarContainer = UICanvasReference.transform.FindChild("CityHealthbarContainer");
+
         this.GetComponent<GroundTileSpawner>().SpawnInitialGroundTiles();
 		WoodCount = FoodCount = OilCount = 0;
 
@@ -44,7 +51,15 @@ public class Main : MonoBehaviour {
 	}
 
 	public void DisableNodePopupGUI() {
+		guiPopupScript.DetatchFromTarget();
 		guiPopupScript.Disable();
+	}
+
+	public StandaloneNodeHealthbar NewCityHealthBar(Node _target) {
+		GameObject newHealthbar = Instantiate(StandaloneHealthbarPrefab) as GameObject;
+		newHealthbar.GetComponent<StandaloneNodeHealthbar>().SetTarget(_target);
+		newHealthbar.transform.SetParent(CityHealthbarContainer);
+		return newHealthbar.GetComponent<StandaloneNodeHealthbar>();
 	}
 
     public void UseResources(string type, int amount) {

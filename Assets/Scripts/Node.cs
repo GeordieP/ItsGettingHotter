@@ -10,10 +10,18 @@ public abstract class Node : MonoBehaviour {
 
 	private GUIPopup guiPopup;
 
+	private Transform guiSpawnLocation;
+
+	public Transform GUISpawnLocation {
+		get { return guiSpawnLocation; }
+	}
+
 	protected virtual void Init() {
 		// for now set the max health to double the start count of each resource, and current to half of max
 		maxHealth = (WoodCount + OilCount + FoodCount) * 2;
 		health = maxHealth / 2;
+
+		guiSpawnLocation = transform.FindChild("GUISpawnLocation");
 	}
 
 	public abstract UnitTask GetTask();
@@ -47,19 +55,19 @@ public abstract class Node : MonoBehaviour {
 		UpdateAttachedGUI();
 	}
 
-	public void AttachPopup(GUIPopup _guiPopup) {
+	public virtual void AttachPopup(GUIPopup _guiPopup) {
 		guiPopup = _guiPopup;
 		UpdateAttachedGUI();
 	}
 
-	private void UpdateAttachedGUI() {
+	protected virtual void UpdateAttachedGUI() {
 		if (guiPopup) {
 			guiPopup.UpdateText(NodeName, WoodCount, FoodCount, OilCount);
 			guiPopup.UpdateHealthBar(health / maxHealth);
 		}
 	}
 
-	public void DetachPopup() {
+	public virtual void DetachPopup() {
 		guiPopup = null;
 	}
 }
