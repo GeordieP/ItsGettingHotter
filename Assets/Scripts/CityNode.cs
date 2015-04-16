@@ -5,12 +5,16 @@ public class CityNode : Node {
 	public GameObject unitPrefab;
 	private StandaloneNodeHealthbar standaloneNodeHealthbar;
 
+
 	void Start() {
 		// Do everything in init so we can call init on base as well
 		Init();
 	}
 
 	protected override void Init() {
+		GameObject health = GameObject.Find ("Health");
+		HealthDrain HD = health.GetComponent<HealthDrain> ();
+		HD.transform.localPosition += new Vector3(25, 0, 0);
 		NodeName = "City";
 		StartCoroutine(SpawnUnitsDelayed());
 
