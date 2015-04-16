@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CityNode : Node {
 	public GameObject unitPrefab;
+	private StandaloneNodeHealthbar standaloneNodeHealthbar;
 
 	void Start() {
 		// Do everything in init so we can call init on base as well
@@ -17,11 +18,22 @@ public class CityNode : Node {
 		OilCount = Balance.CityOilStartCount;
 		FoodCount = Balance.CityFoodStartCount;
 
+
 		base.Init();
+
 	}
 
 	private IEnumerator SpawnUnitsDelayed() {
 		yield return new WaitForSeconds(0.5f);
+
+		// call this afterwards, so the base class has a chance to set up some dependencies (eg finding the UI spawn loc child)
+		standaloneNodeHealthbar = GameObject.Find("MAIN").GetComponent<Main>().NewCityHealthBar(this);
+
+		if (standaloneNodeHealthbar) {
+			standaloneNodeHealthbar.UpdateHealthBar(health / maxHealth);
+		}
+
+
 		SpawnUnit(5);
 	}
 
@@ -62,6 +74,14 @@ public class CityNode : Node {
 		CheckResourceCount();
 	}
 
+	protected override void UpdateAttachedGUI() {
+		if (standaloneNodeHealthbar) {
+			standaloneNodeHealthbar.UpdateHealthBar(health / maxHealth);
+		}
+
+		base.UpdateAttachedGUI();
+	}
+
 	private void CheckResourceCount() {
 		// doing it in main doesnst seem to work
 		GameObject.Find("MAIN").GetComponent<Main>().CheckResourceValues();
@@ -71,5 +91,15 @@ public class CityNode : Node {
 		//    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
 		//    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
 		//}
+	}
+
+	public override void AttachPopup(GUIPopup _guiPopup) {
+		standaloneNodeHealthbar.Disable();
+		base.AttachPopup(_guiPopup);
+	}
+
+	public override void DetachPopup() {
+		standaloneNodeHealthbar.Enable();
+		base.DetachPopup();
 	}
 }

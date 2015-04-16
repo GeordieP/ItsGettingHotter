@@ -17,6 +17,10 @@ public class GUIPopup : MonoBehaviour {
 		this.gameObject.SetActive(false);
 	}
 
+	public void DetatchFromTarget() {
+		target.DetachPopup();
+	}
+
 	public void Enable() {
 		this.gameObject.SetActive(true);
 	}
@@ -35,7 +39,7 @@ public class GUIPopup : MonoBehaviour {
 
 	void Update() {
 		if (target) {
-			this.transform.position = Camera.main.WorldToScreenPoint(target.transform.position);
+			this.transform.position = Camera.main.WorldToScreenPoint(target.GUISpawnLocation.position);
 		}
 	}
 

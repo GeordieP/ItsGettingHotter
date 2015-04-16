@@ -10,6 +10,7 @@ public class GroundTileSpawner : MonoBehaviour {
     private int tileCount = 0;
     public GameObject cityGameObject;
     public GameObject forestGameObject;
+    public GameObject oilGameObject;
 
     void Awake() {
         spawnLocations = new List<Vector3>();
@@ -63,8 +64,8 @@ public class GroundTileSpawner : MonoBehaviour {
 
         SpawnNode(groundTileObject, forestGameObject);
         SpawnNode(groundTileObject, forestGameObject);
-        SpawnNode(groundTileObject, forestGameObject);
-        SpawnNode(groundTileObject, forestGameObject);
+        SpawnNode(groundTileObject, oilGameObject);
+        SpawnNode(groundTileObject, oilGameObject);
         SpawnNode(groundTileObject, forestGameObject);
         SpawnNode(groundTileObject, forestGameObject);
 
