@@ -11,6 +11,7 @@ public class GroundTileSpawner : MonoBehaviour {
     public GameObject cityGameObject;
     public GameObject forestGameObject;
     public GameObject oilGameObject;
+	public GameObject farmGameObject;
 
     void Awake() {
         spawnLocations = new List<Vector3>();
@@ -47,6 +48,7 @@ public class GroundTileSpawner : MonoBehaviour {
         SpawnNode(groundTileObject, cityGameObject);
         SpawnNode(groundTileObject, forestGameObject);
         SpawnNode(groundTileObject, forestGameObject);
+		SpawnNode(groundTileObject, farmGameObject);
 
         CreateAdjacentSpawnLocations(groundTileObject.transform.position);
 

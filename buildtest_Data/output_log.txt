@@ -4,7 +4,7 @@ Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
     Renderer: NVIDIA GeForce GTX 760 (ID=0x1187)
     Vendor:   NVIDIA
-    VRAM:     1985 MB
+    VRAM:     1987 MB
 Begin MonoManager ReloadAssembly
 Platform assembly: C:\Users\Brad\Documents\Itsgettinghotter\buildtest_Data\Managed\UnityEngine.dll (this message is harmless)
 Loading C:\Users\Brad\Documents\Itsgettinghotter\buildtest_Data\Managed\UnityEngine.dll into Unity Child Domain
@@ -22,12 +22,48 @@ desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
 Platform assembly: C:\Users\Brad\Documents\Itsgettinghotter\buildtest_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Brad\Documents\Itsgettinghotter\buildtest_Data\Managed\System.dll (this message is harmless)
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1a3c -> priority: 1 
+  Thread -> id: 2024 -> priority: 1 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.656571 ms
+UnloadTime: 3.652648 ms
 
-Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 621.
-Total: 0.243650 ms (FindLiveObjects: 0.022588 ms CreateObjectMapping: 0.022889 ms MarkObjects: 0.155406 ms  DeleteObjects: 0.042465 ms)
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 687.
+Total: 0.294549 ms (FindLiveObjects: 0.032828 ms CreateObjectMapping: 0.025298 ms MarkObjects: 0.193655 ms  DeleteObjects: 0.042465 ms)
+
+initial tiles
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.114148 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 701.
+Total: 0.274370 ms (FindLiveObjects: 0.028009 ms CreateObjectMapping: 0.021082 ms MarkObjects: 0.218351 ms  DeleteObjects: 0.006625 ms)
+
+initial tiles
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.497040 ms
+
+Unloading 268 unused Assets to reduce memory usage. Loaded Objects now: 593.
+Total: 0.347856 ms (FindLiveObjects: 0.055115 ms CreateObjectMapping: 0.021383 ms MarkObjects: 0.171669 ms  DeleteObjects: 0.099086 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.552354 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 710.
+Total: 0.306294 ms (FindLiveObjects: 0.025298 ms CreateObjectMapping: 0.023792 ms MarkObjects: 0.211123 ms  DeleteObjects: 0.045778 ms)
+
+initial tiles
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.447247 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 723.
+Total: 0.291537 ms (FindLiveObjects: 0.030719 ms CreateObjectMapping: 0.021383 ms MarkObjects: 0.231302 ms  DeleteObjects: 0.007529 ms)
 
 initial tiles
  
