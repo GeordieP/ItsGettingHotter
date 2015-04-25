@@ -6,34 +6,40 @@ public class HealthDrain : MonoBehaviour {
 
 	public float speed;
 	Image img;
+
+	private Vector2 healthBarStartSize;
+	private float percent = 100f;
 	// Use this for initialization
 	void Start () {
-		 img =  GameObject.Find("Health").GetComponent<Image>();
+		img = this.GetComponent<Image>();
+		healthBarStartSize = img.GetComponent<RectTransform>().sizeDelta;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position -= new Vector3(speed * Time.deltaTime, 0,0);
-		if (transform.localPosition.x >= 0.0f)
-			transform.localPosition = new Vector3 (0, 0, 0);
-		else if (transform.localPosition.x <= -210.0f)
-			img.color = UnityEngine.Color.yellow;
-		if (transform.localPosition.x <= -315.0f)
-			img.color = UnityEngine.Color.red;
-		if (transform.localPosition.x >= -210.0f)
-			img.color = UnityEngine.Color.green;
+		if (speed < 40f) speed *= 1.0004f;
+		percent -= speed * Time.deltaTime;
 
-		speed *= 1.0008f;
-		if (speed >= 40.0f)
-			speed = 40.0f;
-		if(transform.localPosition.x <= -410.0f)
-		{
-			GameObject menu = GameObject.Find ("Main Camera");
-			MenuOpen MO = menu.GetComponent<MenuOpen> ();
-			MO.EndGame ();
-		}
-		//Debug.Log (transform.localPosition.x);
+		if (percent <= 0) EndGame();
+		else if (percent < 25) img.color = Color.red;
+		else if (percent < 50) img.color = Color.yellow;
 
+		img.GetComponent<RectTransform>().sizeDelta = new Vector2(healthBarStartSize.x * percent / 100, healthBarStartSize.y);
+	}
 
+	public void UpdatePercentage(float _percent) {
+		if (_percent > 0f && _percent < 100f) percent = _percent;
+	}
+
+	public void AddHealthPercentage(float _amtToAdd) {
+		percent += _amtToAdd;
+
+		if (percent > 100f) percent = 100f;
+	}
+
+	private void EndGame() {
+		GameObject menu = GameObject.Find("Main Camera");
+		MenuOpen MO = menu.GetComponent<MenuOpen>();
+		MO.EndGame();
 	}
 }

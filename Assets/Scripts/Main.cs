@@ -72,6 +72,7 @@ public class Main : MonoBehaviour {
         if (WoodCount > 500) {
             GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
             GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
+			GameObject.Find("Health").GetComponent<HealthDrain>().AddHealthPercentage(10f);
         }
     }
 }

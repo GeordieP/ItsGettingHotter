@@ -12,9 +12,6 @@ public class CityNode : Node {
 	}
 
 	protected override void Init() {
-		GameObject health = GameObject.Find ("Health");
-		HealthDrain HD = health.GetComponent<HealthDrain> ();
-		HD.transform.localPosition += new Vector3(25, 0, 0);
 		NodeName = "City";
 		StartCoroutine(SpawnUnitsDelayed());
 
