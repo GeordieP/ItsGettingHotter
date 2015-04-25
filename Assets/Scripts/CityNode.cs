@@ -40,7 +40,7 @@ public class CityNode : Node {
 
 	private void SpawnUnit(int numToSpawn = 1) {
 		for (int i = 0; i < numToSpawn; i++) {
-			GameObject tempUnit = Instantiate(unitPrefab, this.transform.position + RandomVec3() * 2, Quaternion.identity) as GameObject;
+			Instantiate(unitPrefab, this.transform.position + RandomVec3() * 2, Quaternion.identity);
 		}
 		GameObject.Find("MAIN").GetComponent<ClickHandling>().RefreshAllUnitsList();
 	}
