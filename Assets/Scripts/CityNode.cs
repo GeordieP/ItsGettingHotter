@@ -4,6 +4,7 @@ using System.Collections;
 public class CityNode : Node {
 	public GameObject unitPrefab;
 	private StandaloneNodeHealthbar standaloneNodeHealthbar;
+	private bool citySpawnCondition = true;
 
 
 	void Start() {
@@ -40,7 +41,7 @@ public class CityNode : Node {
 
 	private void SpawnUnit(int numToSpawn = 1) {
 		for (int i = 0; i < numToSpawn; i++) {
-			Instantiate(unitPrefab, this.transform.position + RandomVec3() * 2, Quaternion.identity);
+			Instantiate(unitPrefab, this.transform.position + new Vector3(0f, -0.19f, 0f) + (RandomVec3() * 2), Quaternion.identity);
 		}
 		GameObject.Find("MAIN").GetComponent<ClickHandling>().RefreshAllUnitsList();
 	}
@@ -85,13 +86,36 @@ public class CityNode : Node {
 
 	private void CheckResourceCount() {
 		// doing it in main doesnst seem to work
-		GameObject.Find("MAIN").GetComponent<Main>().CheckResourceValues();
+		//GameObject.Find("MAIN").GetComponent<Main>().CheckResourceValues();
 
 		//if (WoodCount >= 500) {
 		//    // conditions to spawn a new tile and city
 		//    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
 		//    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
 		//}
+
+		if (citySpawnCondition && WoodCount >= Balance.CityWoodCost && FoodCount >= Balance.CityFoodCost && OilCount >= Balance.CityOilCost) {
+			// we've got a surplus of resources, a new city can be created
+			citySpawnCondition = false;
+
+			print(string.Format("WoodCount {0}, FoodCount {1}, OilCount{2}", WoodCount, FoodCount, OilCount));
+
+			// first, consume the necessary resources that we do have
+			TakeResources(Balance.ResourceTypes.Wood, Balance.CityWoodCost);
+			TakeResources(Balance.ResourceTypes.Food, Balance.CityFoodCost);
+			TakeResources(Balance.ResourceTypes.Oil, Balance.CityOilCost);
+
+			// spawn the new tiles
+			GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
+			GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
+
+			StartCoroutine(CitySpawnCooldown());
+		}
+	}
+
+	private IEnumerator CitySpawnCooldown() {
+		yield return new WaitForSeconds(1f);
+		citySpawnCondition = true;
 	}
 
 	public override void AttachPopup(GUIPopup _guiPopup) {
