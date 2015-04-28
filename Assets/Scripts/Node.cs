@@ -72,7 +72,9 @@ public abstract class Node : MonoBehaviour {
 	}
 
 	public virtual void DetachPopup() {
-		guiPopup.Disable();
-		guiPopup = null;
+		if (guiPopup != null) {
+			guiPopup.Disable();
+			guiPopup = null;
+		}
 	}
 }

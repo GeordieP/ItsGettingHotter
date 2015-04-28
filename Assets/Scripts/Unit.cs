@@ -40,6 +40,11 @@ public class Unit : MonoBehaviour {
 			case States.Idle:
 				break;
 			case States.Walking:
+				if (currentTarget == null) {
+					targetNodes.Clear();
+					ChangeState(States.Idle);
+					break;
+				}
 				transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, speed * Time.deltaTime);
 				break;
 		case States.Working:
