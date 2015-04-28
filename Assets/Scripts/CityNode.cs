@@ -91,15 +91,6 @@ public class CityNode : Node {
 	}
 
 	private void CheckResourceCount() {
-		// doing it in main doesnst seem to work
-		//GameObject.Find("MAIN").GetComponent<Main>().CheckResourceValues();
-
-		//if (WoodCount >= 500) {
-		//    // conditions to spawn a new tile and city
-		//    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
-		//    GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
-		//}
-
 		if (citySpawnCondition && WoodCount >= Balance.CityWoodCost && FoodCount >= Balance.CityFoodCost && OilCount >= Balance.CityOilCost) {
 			// we've got a surplus of resources, a new city can be created
 			citySpawnCondition = false;

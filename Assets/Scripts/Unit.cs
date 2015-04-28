@@ -63,7 +63,8 @@ public class Unit : MonoBehaviour {
 
 	// Work period has gone by, now we can call TaskCompleted on our current task, and move on to the next target in the queue
 	public void TaskCompleted() {
-		currentTask.TaskCompleted(this, currentTarget.GetComponent<Node>());
+		if (currentTarget != null)
+			currentTask.TaskCompleted(this, currentTarget.GetComponent<Node>());
 		NextTarget();
 	}
 
@@ -85,8 +86,10 @@ public class Unit : MonoBehaviour {
         targetNodes.RemoveAt(0);
 
         if (targetNodes.Count > 0) {
-            SetTarget(targetNodes[0]);
-            ChangeState(States.Walking);
+			if (targetNodes[0] != null) {
+				SetTarget(targetNodes[0]);
+				ChangeState(States.Walking);
+			}
         }	// else no more nodes left in the list
     }
 

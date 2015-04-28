@@ -12,7 +12,7 @@ public class FarmNode : Node {
 		NodeName = "Farm";
 		// Forest starts with max wood count, and zero of other resources
 		WoodCount = 0;
-		FoodCount = Balance.FoodResourceCount;
+		FoodCount = Balance.FarmStartFoodCount;
 		OilCount = 0;
 		
 		base.Init();

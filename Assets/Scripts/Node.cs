@@ -45,6 +45,10 @@ public abstract class Node : MonoBehaviour {
 				break;
 		}
 		health = WoodCount + OilCount + FoodCount;
+		if (health <= 0) {
+			Destroy(gameObject);
+			DetachPopup();
+		}
 
 		UpdateAttachedGUI();
 	}
@@ -68,6 +72,7 @@ public abstract class Node : MonoBehaviour {
 	}
 
 	public virtual void DetachPopup() {
+		guiPopup.Disable();
 		guiPopup = null;
 	}
 }

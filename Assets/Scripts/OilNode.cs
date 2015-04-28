@@ -12,7 +12,7 @@ public class OilNode : Node {
         // Forest starts with max wood count, and zero of other resources
         WoodCount = 0;
         FoodCount = 0;
-        OilCount = Balance.OilResourceCount;
+        OilCount = Balance.OilStartOilCount;
 
         base.Init();
     }
