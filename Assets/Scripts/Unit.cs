@@ -26,9 +26,7 @@ public class Unit : MonoBehaviour {
 	public Renderer[] renderers;
 
 	// Unit Movement
-    private Vector3 moveAxis = Vector3.zero;
     private float speed = 4.0f;
-    private float currentTaskTime = 0.0f;
 
     // Use this for initialization
     void Start() {
@@ -107,7 +105,6 @@ public class Unit : MonoBehaviour {
 
     public void SetTarget(Transform _target) {
         currentTarget = _target;
-        moveAxis = Vector3.Cross(this.transform.position, currentTarget.position);
 
         if (state == States.Idle) {
             ChangeState(States.Walking);

@@ -5,9 +5,9 @@ public static class Balance {
 	public enum ResourceTypes { Wood, Food, Oil};
 
 	// Amount of resources the respective node offers
-	public const int WoodResourceCount = 50;						// Wood from a forest
-	public const int FoodResourceCount = 100;						// Food from a farm
-	public const int OilResourceCount = 50;							// Oil from an oil rig
+	public const int WoodResourceCount = 25;						// Wood from a forest
+	public const int FoodResourceCount = 50;						// Food from a farm
+	public const int OilResourceCount = 25;							// Oil from an oil rig
 
 	// Amount of resources it will cost to build a new city
 	// This amount of each will be taken from the global resource pool each time a city spawns
@@ -16,7 +16,7 @@ public static class Balance {
 	public const int CityOilCost = 0;
 
 	// Amount of each resource a city will spawn with
-	public const int CityWoodStartCount = 1000;
+	public const int CityWoodStartCount = 250;
 	public const int CityFoodStartCount = 0;
 	public const int CityOilStartCount = 0;
 

@@ -49,6 +49,7 @@ public class GroundTileSpawner : MonoBehaviour {
         SpawnNode(groundTileObject, forestGameObject);
         SpawnNode(groundTileObject, forestGameObject);
 		SpawnNode(groundTileObject, farmGameObject);
+		SpawnNode(groundTileObject, oilGameObject);
 
         CreateAdjacentSpawnLocations(groundTileObject.transform.position);
 
@@ -70,27 +71,6 @@ public class GroundTileSpawner : MonoBehaviour {
         SpawnNode(groundTileObject, oilGameObject);
         SpawnNode(groundTileObject, forestGameObject);
         SpawnNode(groundTileObject, forestGameObject);
-
-        CreateAdjacentSpawnLocations(groundTileObject.transform.position);
-
-        tileCount++;
-        spawnLocations.RemoveAt(index);
-    }
-
-    public void SpawnGroundTile() {
-        int index = Random.Range(0, spawnLocations.Count - 1);
-        Vector3 location = spawnLocations[index];
-        GameObject groundTileObject = Instantiate(groundTile, location, Quaternion.identity) as GameObject;
-
-        if (tileCount == 0) {
-            SpawnNode(groundTileObject, cityGameObject);
-        } else {
-            // spawn some extra trees
-            SpawnNode(groundTileObject, forestGameObject);
-        }
-        SpawnNode(groundTileObject, forestGameObject);
-        SpawnNode(groundTileObject, forestGameObject);
-
 
         CreateAdjacentSpawnLocations(groundTileObject.transform.position);
 
