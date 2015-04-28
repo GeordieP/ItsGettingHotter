@@ -24,7 +24,9 @@ public class HealthDrain : MonoBehaviour {
 		else if (percent < 25) img.color = Color.red;
 		else if (percent < 50) img.color = Color.yellow;
 
-		img.GetComponent<RectTransform>().sizeDelta = new Vector2(healthBarStartSize.x * percent / 100, healthBarStartSize.y);
+		//img.GetComponent<RectTransform>().sizeDelta = new Vector2(healthBarStartSize.x * percent / 100, healthBarStartSize.y);
+		img.GetComponent<RectTransform>().sizeDelta = new Vector2(healthBarStartSize.x * World.Instance.WorldHealth / 100, healthBarStartSize.y);
+		//print("worldhealth " + World.Instance.WorldCO2);
 	}
 
 	public void UpdatePercentage(float _percent) {

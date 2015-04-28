@@ -67,6 +67,9 @@ public class GroundTileSpawner : MonoBehaviour {
         GameObject groundTileObject = Instantiate(groundTile, location, Quaternion.identity) as GameObject;
 
         SpawnNode(groundTileObject, cityGameObject);
+		World.Instance.WorldCO2 += Balance.CitySpawnCo2Emission;
+		World.Instance.WorldCH4 += Balance.CitySpawnCh4Emission;
+
 		SpawnNodesOnTile(groundTileObject);
 
         CreateAdjacentSpawnLocations(groundTileObject.transform.position);
@@ -105,6 +108,8 @@ public class GroundTileSpawner : MonoBehaviour {
 					break;
 				case 2:
 					SpawnNode(groundTileObject, forestGameObject);
+					World.Instance.WorldCO2 -= Balance.ForestCo2Reduction;
+					World.Instance.WorldCH4 -= Balance.ForestCh4Reduction;
 					break;
 			}
 		}

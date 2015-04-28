@@ -26,7 +26,13 @@ public class Main : MonoBehaviour {
 
         // initially set this to the amount we need to build a city, so we can spawn the first one
         WoodCount = Balance.CityWoodCost;
+		StartCoroutine(World.Instance.TimeCountDown());
+
     }
+
+	void Update() {
+		// Update the global health 
+	}
 
 	public void AddResource(Balance.ResourceTypes _resourceType, int count) {
 		// Add the resources to their appropriate counter

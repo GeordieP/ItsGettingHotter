@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public static class Balance {
+﻿public static class Balance {
 	// All types of resources available
 	public enum ResourceTypes { Wood, Food, Oil};
 
@@ -24,6 +22,25 @@ public static class Balance {
 	public const float WoodTaskTime = 2.0f;
 	public const float OilTaskTime = 10.0f;
 	public const float FoodTaskTime = 7.0f;
+
+	public const float WorldStartHealth = 100.0f;
+	public const float WorldStartChInfluence = 0.05f;
+	public const float WorldStartCoInfluence = 0.025f;
+	public const float WorldStartCh4 = 5.0f;
+	public const float WorldStartCo2 = 5.0f;
+
+	// Amount that the CO2 or CH4 level changes by when a forest spawns
+	public const float ForestCo2Reduction = 1.0f;
+	public const float ForestCh4Reduction = 1.0f;
+
+	// Amount that the CO2 or CH4 level changes by when a city spawns
+	public const float CitySpawnCo2Emission = 3.0f;
+	public const float CitySpawnCh4Emission = 1.0f;
+
+	public const float CityCo2Emission = 0.05f;
+	public const float CityCh4Emission = 0.1f;
+
+
 }
 
 /*

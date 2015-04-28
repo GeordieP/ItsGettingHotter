@@ -25,6 +25,12 @@ public class CityNode : Node {
 
 	}
 
+	void Update() {
+		// Emit the city emissions amount every 1 second
+		World.Instance.WorldCO2 += Balance.CityCo2Emission * Time.deltaTime;
+		World.Instance.WorldCH4 += Balance.CityCh4Emission * Time.deltaTime;
+	}
+
 	private IEnumerator SpawnUnitsDelayed() {
 		yield return new WaitForSeconds(0.5f);
 
