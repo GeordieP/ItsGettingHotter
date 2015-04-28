@@ -117,6 +117,11 @@ public class Unit : MonoBehaviour {
 			ChangeState(States.Working);
 			StartTask();
         }
+
+        else if (otherCollider.gameObject.transform != currentTarget)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, otherCollider.transform.position, -0.1f);
+        }
     }
 
     /* Called by the camera when selecting units. Prevents selecting units that shouldn't be
