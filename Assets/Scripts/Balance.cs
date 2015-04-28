@@ -20,8 +20,8 @@
 
 	// Task times (seconds)
 	public const float WoodTaskTime = 2.0f;
-	public const float OilTaskTime = 10.0f;
-	public const float FoodTaskTime = 7.0f;
+	public const float OilTaskTime = 4.0f;
+	public const float FoodTaskTime = 3.0f;
 
 	public const float WorldStartHealth = 100.0f;
 	public const float WorldStartChInfluence = 0.05f;

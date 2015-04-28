@@ -104,8 +104,6 @@ public class CityNode : Node {
 			// we've got a surplus of resources, a new city can be created
 			citySpawnCondition = false;
 
-			print(string.Format("WoodCount {0}, FoodCount {1}, OilCount{2}", WoodCount, FoodCount, OilCount));
-
 			// first, consume the necessary resources that we do have
 			TakeResources(Balance.ResourceTypes.Wood, Balance.CityWoodCost);
 			TakeResources(Balance.ResourceTypes.Food, Balance.CityFoodCost);

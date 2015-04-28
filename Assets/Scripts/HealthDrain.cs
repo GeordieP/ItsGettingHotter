@@ -17,26 +17,13 @@ public class HealthDrain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (speed < 40f) speed *= 1.0004f;
-		percent -= speed * Time.deltaTime;
+		percent = World.Instance.WorldHealth;
 
 		if (percent <= 0) EndGame();
 		else if (percent < 25) img.color = Color.red;
 		else if (percent < 50) img.color = Color.yellow;
 
-		//img.GetComponent<RectTransform>().sizeDelta = new Vector2(healthBarStartSize.x * percent / 100, healthBarStartSize.y);
 		img.GetComponent<RectTransform>().sizeDelta = new Vector2(healthBarStartSize.x * World.Instance.WorldHealth / 100, healthBarStartSize.y);
-		//print("worldhealth " + World.Instance.WorldCO2);
-	}
-
-	public void UpdatePercentage(float _percent) {
-		if (_percent > 0f && _percent < 100f) percent = _percent;
-	}
-
-	public void AddHealthPercentage(float _amtToAdd) {
-		percent += _amtToAdd;
-
-		if (percent > 100f) percent = 100f;
 	}
 
 	private void EndGame() {

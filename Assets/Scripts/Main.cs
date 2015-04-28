@@ -26,12 +26,11 @@ public class Main : MonoBehaviour {
 
         // initially set this to the amount we need to build a city, so we can spawn the first one
         WoodCount = Balance.CityWoodCost;
-		StartCoroutine(World.Instance.TimeCountDown());
-
     }
 
 	void Update() {
-		// Update the global health 
+		// Update the global health
+		World.Instance.Update();
 	}
 
 	public void AddResource(Balance.ResourceTypes _resourceType, int count) {
@@ -78,7 +77,6 @@ public class Main : MonoBehaviour {
         if (WoodCount > 500) {
             GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
             GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
-			GameObject.Find("Health").GetComponent<HealthDrain>().AddHealthPercentage(10f);
         }
     }
 }

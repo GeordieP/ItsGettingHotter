@@ -50,18 +50,13 @@ public class World {
 	private World() {
 		// Initially update the pollution value
 		UpdatePollution();
-		Debug.Log(debugText = GameObject.Find("DebugText").GetComponent<Text>());
+		debugText = GameObject.Find("DebugText").GetComponent<Text>();
 	}
 
-	// This gets called every update from Main... really not happy with the system, but it's slightly better than having a singleton in herit from MonoBehaviour
-	public IEnumerator TimeCountDown() {
-		while (worldHealth > 0) {
-			yield return new WaitForSeconds(0.5f);
-
-			UpdatePollution();
-			UpdateHealth();
-			DebugText(string.Format("worldhealth {0} | co2 {1} | ch4 {2}", worldHealth, worldCO2, worldCH4));
-		}
+	public void Update() {
+		UpdatePollution();
+		UpdateHealth();
+		DebugText(string.Format("worldhealth {0} | co2 {1} | ch4 {2}", Mathf.Round(worldHealth * 10.0f) / 10.0f, Mathf.Round(worldCO2 * 10.0f) / 10.0f, Mathf.Round(worldCH4 * 10.0f) / 10.0f));
 	}
 
 	private void DebugText(string output) {
@@ -74,6 +69,6 @@ public class World {
 
 	public void UpdateHealth() {
 		// TODO: Rename or change variable used to TimeLeftInMinutes?
-		worldHealth -= pollutionFactor;
+		worldHealth -= pollutionFactor * Time.deltaTime;
 	}	
 }
