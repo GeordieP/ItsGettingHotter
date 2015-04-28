@@ -106,8 +106,7 @@ public class CityNode : Node {
 			TakeResources(Balance.ResourceTypes.Oil, Balance.CityOilCost);
 
 			// spawn the new tiles
-			GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnCityTile();
-			GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnResourceTile();
+			GameObject.Find("MAIN").GetComponent<GroundTileSpawner>().SpawnExpansionTiles();
 
 			StartCoroutine(CitySpawnCooldown());
 		}
