@@ -42,6 +42,9 @@ $RECYCLE.BIN/
 *.tmp
 *.booproj
 
+#Blender Temporary backups
+*.blend1
+
 # Velocity stuff
 *.vlvl
 *.vdem
